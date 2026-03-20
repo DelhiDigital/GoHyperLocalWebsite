@@ -1,54 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { Send, CheckCircle2, Loader2 } from "lucide-react";
-
-// Get your free access key at https://web3forms.com — enter hello@delhidigital.co
-const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "";
+import { Send, Mail, Phone } from "lucide-react";
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    message: "",
+  });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
 
-    const form = e.currentTarget;
-    const data = {
-      access_key: WEB3FORMS_KEY,
-      subject: "New Enquiry — GoHyperLocal Website",
-      from_name: "GoHyperLocal Website",
-      name: (form.elements.namedItem("name") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      company: (form.elements.namedItem("company") as HTMLInputElement).value,
-      phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-    };
+    const subject = encodeURIComponent(
+      `New Enquiry from ${formData.name} — ${formData.company}`
+    );
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\nPhone: ${formData.phone || "Not provided"}\n\nMessage:\n${formData.message || "No message"}`
+    );
 
-    try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      const result = await res.json();
-
-      if (!result.success) {
-        throw new Error(result.message || "Something went wrong.");
-      }
-
-      setSubmitted(true);
-    } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Failed to send. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
+    window.location.href = `mailto:hello@delhidigital.co?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -69,122 +49,124 @@ export default function Contact() {
             Get in touch with our team to see how GoHyperLocal can power your
             hyperlocal delivery operations and customer experience.
           </p>
+
+          {/* Direct contact options */}
+          <div className="flex flex-wrap items-center justify-center gap-6 mt-6">
+            <a
+              href="mailto:hello@delhidigital.co"
+              className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
+            >
+              <Mail className="w-5 h-5" />
+              <span className="text-sm font-medium">hello@delhidigital.co</span>
+            </a>
+          </div>
         </div>
 
-        {submitted ? (
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-12 text-center border border-white/20">
-            <CheckCircle2 className="w-16 h-16 text-cyan mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-white mb-2">
-              Thank you for reaching out!
-            </h3>
-            <p className="text-white/70">
-              Our team will get back to you within 24 hours.
-            </p>
-          </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 sm:p-10 border border-white/20"
-          >
-            <div className="grid sm:grid-cols-2 gap-5 mb-5">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-white/80 mb-1.5"
-                >
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan/50 focus:border-transparent"
-                  placeholder="John Doe"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-white/80 mb-1.5"
-                >
-                  Work Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan/50 focus:border-transparent"
-                  placeholder="john@company.com"
-                />
-              </div>
-            </div>
-            <div className="grid sm:grid-cols-2 gap-5 mb-5">
-              <div>
-                <label
-                  htmlFor="company"
-                  className="block text-sm font-medium text-white/80 mb-1.5"
-                >
-                  Company
-                </label>
-                <input
-                  type="text"
-                  id="company"
-                  name="company"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan/50 focus:border-transparent"
-                  placeholder="Acme Inc."
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-medium text-white/80 mb-1.5"
-                >
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan/50 focus:border-transparent"
-                  placeholder="+91 98765 43210"
-                />
-              </div>
-            </div>
-            <div className="mb-6">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 sm:p-10 border border-white/20"
+        >
+          <div className="grid sm:grid-cols-2 gap-5 mb-5">
+            <div>
               <label
-                htmlFor="message"
+                htmlFor="name"
                 className="block text-sm font-medium text-white/80 mb-1.5"
               >
-                Tell us about your requirements
+                Full Name
               </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={4}
-                className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan/50 focus:border-transparent resize-none"
-                placeholder="We're looking to launch quick commerce for our D2C brand..."
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan/50 focus:border-transparent"
+                placeholder="John Doe"
               />
             </div>
-
-            {error && <p className="text-red-300 text-sm mb-4">{error}</p>}
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full sm:w-auto bg-white text-navy font-semibold px-8 py-3 rounded-lg hover:bg-white/90 transition-colors flex items-center justify-center gap-2 disabled:opacity-60"
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-white/80 mb-1.5"
+              >
+                Work Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan/50 focus:border-transparent"
+                placeholder="john@company.com"
+              />
+            </div>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-5 mb-5">
+            <div>
+              <label
+                htmlFor="company"
+                className="block text-sm font-medium text-white/80 mb-1.5"
+              >
+                Company
+              </label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                required
+                value={formData.company}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan/50 focus:border-transparent"
+                placeholder="Acme Inc."
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium text-white/80 mb-1.5"
+              >
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan/50 focus:border-transparent"
+                placeholder="+91 98765 43210"
+              />
+            </div>
+          </div>
+          <div className="mb-6">
+            <label
+              htmlFor="message"
+              className="block text-sm font-medium text-white/80 mb-1.5"
             >
-              {loading ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
-              ) : (
-                <Send className="w-4 h-4" />
-              )}
-              {loading ? "Sending..." : "Contact Us"}
-            </button>
-          </form>
-        )}
+              Tell us about your requirements
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows={4}
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan/50 focus:border-transparent resize-none"
+              placeholder="We're looking to launch quick commerce for our D2C brand..."
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full sm:w-auto bg-white text-navy font-semibold px-8 py-3 rounded-lg hover:bg-white/90 transition-colors flex items-center justify-center gap-2"
+          >
+            <Send className="w-4 h-4" />
+            Contact Us
+          </button>
+        </form>
       </div>
     </section>
   );
