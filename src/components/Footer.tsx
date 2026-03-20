@@ -81,18 +81,6 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Trust badges */}
-        <div className="flex flex-wrap items-center justify-center gap-8 py-8 border-t border-white/10 mb-8">
-          {["SOC 2", "GDPR", "ISO 27001", "ISO 27701"].map((badge) => (
-            <div
-              key={badge}
-              className="bg-white/5 rounded-lg px-4 py-2 text-xs font-semibold text-white/50 border border-white/10"
-            >
-              {badge}
-            </div>
-          ))}
-        </div>
-
         {/* Bottom */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10">
           <p className="text-sm text-white/40">
