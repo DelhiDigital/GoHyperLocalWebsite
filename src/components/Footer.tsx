@@ -53,14 +53,34 @@ export default function Footer() {
             <h4 className="font-semibold text-sm mb-4 text-white/80">
               Get in Touch
             </h4>
-            <ul className="space-y-2">
-              <li className="text-sm text-white/40">
-                hello@gohyperlocal.com
-              </li>
-              <li className="text-sm text-white/40">
-                New Delhi, India
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  href="mailto:hello@delhidigital.co"
+                  className="text-sm text-white/40 hover:text-white/80 transition-colors"
+                >
+                  hello@delhidigital.co
+                </Link>
               </li>
             </ul>
+            <div className="flex items-center gap-4 mt-5">
+              <Link
+                href="https://in.linkedin.com/company/delhidigitalco"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-white/40 hover:text-white/80 transition-colors"
+              >
+                LinkedIn
+              </Link>
+              <Link
+                href="https://www.instagram.com/delhidigitalco/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-white/40 hover:text-white/80 transition-colors"
+              >
+                Instagram
+              </Link>
+            </div>
           </div>
         </div>
 
