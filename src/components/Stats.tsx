@@ -1,49 +1,56 @@
-import { Star } from "lucide-react";
+import { TrendingUp, Clock, Package, Users } from "lucide-react";
+
+const stats = [
+  {
+    icon: TrendingUp,
+    value: "$5.5B",
+    label: "Quick commerce market in India by 2025",
+  },
+  {
+    icon: Clock,
+    value: "42%",
+    label: "YoY growth in same-day hyperlocal orders",
+  },
+  {
+    icon: Users,
+    value: "61%",
+    label: "Shoppers expect delivery under 3 hours",
+  },
+  {
+    icon: Package,
+    value: "30%",
+    label: "Higher repeat rate with branded tracking",
+  },
+];
 
 export default function Stats() {
   return (
     <section className="py-20 bg-gray-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-3 gap-8 items-center">
-          {/* G2 Rating */}
-          <div className="bg-white rounded-2xl p-8 border border-gray-100 text-center shadow-sm">
-            <div className="flex justify-center mb-3">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-6 h-6 text-yellow-400 fill-yellow-400"
-                />
-              ))}
+        <h2 className="text-3xl sm:text-4xl font-bold text-navy text-center mb-4">
+          The quick commerce opportunity
+        </h2>
+        <p className="text-lg text-gray-medium text-center max-w-2xl mx-auto mb-12">
+          The market is moving fast. These industry numbers show why now is the
+          time to launch your hyperlocal delivery operations.
+        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="bg-white rounded-2xl p-8 border border-gray-100 text-center shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div className="w-12 h-12 rounded-xl bg-blue/10 flex items-center justify-center mx-auto mb-4">
+                <stat.icon className="w-6 h-6 text-blue" />
+              </div>
+              <div className="text-3xl font-bold text-gray-900 mb-2">
+                {stat.value}
+              </div>
+              <div className="text-sm text-gray-500 leading-relaxed">
+                {stat.label}
+              </div>
             </div>
-            <div className="text-3xl font-bold text-navy mb-1">4.8 / 5</div>
-            <div className="text-gray-medium">Rated on G2</div>
-          </div>
-
-          {/* Key stat */}
-          <div className="bg-white rounded-2xl p-8 border border-gray-100 text-center shadow-sm">
-            <div className="text-4xl font-bold text-blue mb-2">42%</div>
-            <div className="text-gray-medium leading-relaxed">
-              Same-day hyperlocal orders grew by 42% in one year
-            </div>
-          </div>
-
-          {/* Capterra Rating */}
-          <div className="bg-white rounded-2xl p-8 border border-gray-100 text-center shadow-sm">
-            <div className="flex justify-center mb-3">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className={`w-6 h-6 ${
-                    i < 4
-                      ? "text-yellow-400 fill-yellow-400"
-                      : "text-yellow-400/50 fill-yellow-400/50"
-                  }`}
-                />
-              ))}
-            </div>
-            <div className="text-3xl font-bold text-navy mb-1">4.4 / 5</div>
-            <div className="text-gray-medium">Rated on Capterra</div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

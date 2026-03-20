@@ -1,11 +1,10 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import TrustedBrands from "@/components/TrustedBrands";
 import Testimonials from "@/components/Testimonials";
 import Features from "@/components/Features";
 import ProductPillars from "@/components/ProductPillars";
 import USP from "@/components/USP";
-import Integrations from "@/components/Integrations";
+import HowItWorks from "@/components/HowItWorks";
 import Stats from "@/components/Stats";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
@@ -52,10 +51,10 @@ export default function Home() {
               },
               {
                 "@type": "Question",
-                name: "Which hyperlocal carriers does GoHyperLocal integrate with?",
+                name: "Which carriers does GoHyperLocal work with?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "We integrate with 30+ hyperlocal and express delivery carriers including Shadowfax, Porter, Dunzo, Borzo, Zomato, Swiggy, Uber, Delhivery, and many more.",
+                  text: "We integrate with the carriers you already use or need. We onboard and integrate carriers based on your specific requirements, geography, and operations.",
                 },
               },
               {
@@ -82,12 +81,11 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <TrustedBrands />
         <Testimonials />
         <Features />
         <ProductPillars />
         <USP />
-        <Integrations />
+        <HowItWorks />
         <Stats />
         <FAQ />
         <Contact />

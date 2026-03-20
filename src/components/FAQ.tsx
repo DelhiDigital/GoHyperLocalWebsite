@@ -12,9 +12,9 @@ const faqs = [
   },
   {
     question:
-      "Which hyperlocal carriers does GoHyperLocal integrate with?",
+      "Which carriers does GoHyperLocal work with?",
     answer:
-      "We integrate with 30+ hyperlocal and express delivery carriers including Shadowfax, Porter, Dunzo, Borzo, Zomato, Swiggy, Uber, Delhivery, Pidge, Blowhorn, and many more. Our pre-built integrations let you go live in days, and our smart carrier allocation ensures orders are always assigned to the best available rider.",
+      "We integrate with the carriers you already use — or need. Rather than locking you into a fixed list, we onboard and integrate carriers based on your specific requirements, geography, and operations. Whether it's a national logistics provider or a hyperlocal fleet, we handle the integration so you can go live fast.",
   },
   {
     question:
