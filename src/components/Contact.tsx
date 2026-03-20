@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { Send, CheckCircle2, Loader2 } from "lucide-react";
 
+// Get your free access key at https://web3forms.com — enter hello@delhidigital.co
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "";
+
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -15,6 +18,9 @@ export default function Contact() {
 
     const form = e.currentTarget;
     const data = {
+      access_key: WEB3FORMS_KEY,
+      subject: "New Enquiry — GoHyperLocal Website",
+      from_name: "GoHyperLocal Website",
       name: (form.elements.namedItem("name") as HTMLInputElement).value,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       company: (form.elements.namedItem("company") as HTMLInputElement).value,
@@ -23,20 +29,23 @@ export default function Contact() {
     };
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
-      if (!res.ok) {
-        const body = await res.json();
-        throw new Error(body.error || "Something went wrong.");
+      const result = await res.json();
+
+      if (!result.success) {
+        throw new Error(result.message || "Something went wrong.");
       }
 
       setSubmitted(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to send. Please try again.");
+      setError(
+        err instanceof Error ? err.message : "Failed to send. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -160,9 +169,7 @@ export default function Contact() {
               />
             </div>
 
-            {error && (
-              <p className="text-red-300 text-sm mb-4">{error}</p>
-            )}
+            {error && <p className="text-red-300 text-sm mb-4">{error}</p>}
 
             <button
               type="submit"
