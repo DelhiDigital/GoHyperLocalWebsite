@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Zap } from "lucide-react";
+import Image from "next/image";
 
 const footerLinks = {
   Products: [
@@ -45,9 +45,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue to-cyan flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" />
-              </div>
+              <Image
+                src="/Asset 21@4x-8.png"
+                alt="GoHyperLocal"
+                width={40}
+                height={40}
+                className="rounded-lg"
+              />
               <span className="text-lg font-semibold">GoHyperLocal</span>
             </Link>
             <p className="text-sm text-white/50 leading-relaxed">

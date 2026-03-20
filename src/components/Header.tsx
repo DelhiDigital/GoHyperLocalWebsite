@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Menu,
   X,
@@ -68,9 +69,13 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue to-cyan flex items-center justify-center">
-              <Zap className="w-6 h-6 text-white" />
-            </div>
+            <Image
+              src="/Asset 20@4x-8.png"
+              alt="GoHyperLocal"
+              width={48}
+              height={48}
+              className="rounded-lg"
+            />
             <span className="text-xl font-semibold text-white tracking-tight">
               GoHyperLocal
             </span>
