@@ -23,21 +23,21 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-/* Gradient CTA button */
+/* CTA button — white bg, blue border */
 .btn-gradient {
-  background: linear-gradient(68.48deg, #001B61 17.41%, #155FFF 53.18%, #0EE2E2 77.71%);
-  color: #fff;
+  background: #ffffff;
+  color: #155FFF;
   border-radius: 8px;
   padding: 12px 44px;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
   transition: all 0.2s ease-in;
-  border: 2px solid transparent;
+  border: 2px solid #155FFF;
 }
 
 .btn-gradient:hover {
-  background: transparent;
-  color: #155FFF;
+  background: #155FFF;
+  color: #ffffff;
   border-color: #155FFF;
 }
 
