@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -63,22 +64,24 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-            <div className="flex items-center gap-4 mt-5">
+            <div className="flex items-center gap-3 mt-5">
               <Link
                 href="https://in.linkedin.com/company/delhidigitalco"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-white/40 hover:text-white/80 transition-colors"
+                className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/20 transition-all"
+                aria-label="LinkedIn"
               >
-                LinkedIn
+                <FaLinkedinIn className="w-4 h-4" />
               </Link>
               <Link
                 href="https://www.instagram.com/delhidigitalco/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-white/40 hover:text-white/80 transition-colors"
+                className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/20 transition-all"
+                aria-label="Instagram"
               >
-                Instagram
+                <FaInstagram className="w-4 h-4" />
               </Link>
             </div>
           </div>
