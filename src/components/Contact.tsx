@@ -36,8 +36,8 @@ export default function Contact() {
     <section id="contact" className="py-20 relative overflow-hidden">
       {/* Background image */}
       <Image
-        src="/images/logistics-belt.jpg"
-        alt="Logistics warehouse operations"
+        src="/images/shipping-boxes.jpg"
+        alt="Scanning delivery parcel with phone for quick commerce tracking"
         fill
         className="object-cover"
       />

@@ -112,8 +112,8 @@ export default function Hero() {
               {/* Background image */}
               <div className="rounded-2xl overflow-hidden relative">
                 <Image
-                  src="/images/dark-store.jpg"
-                  alt="Warehouse fulfillment center for quick commerce operations"
+                  src="/images/hero-warehouse.jpg"
+                  alt="Aerial view of logistics and shipping containers powering quick commerce"
                   width={600}
                   height={480}
                   className="object-cover rounded-2xl w-full h-[480px]"
