@@ -9,6 +9,8 @@ const steps = [
     title: "Set Up Your Dark Stores",
     description:
       "Configure your retail stores or warehouses as fulfillment centers. Define delivery zones, serviceability polygons, and store-level inventory rules.",
+    image: "/images/step-darkstore.jpg",
+    imageAlt: "Warehouse interior set up as a dark store fulfillment center",
   },
   {
     step: "02",
@@ -16,6 +18,8 @@ const steps = [
     title: "We Integrate Your Carriers",
     description:
       "Tell us which carriers you work with — or need — and we handle the integration. New carrier? We'll onboard them for you, tailored to your operations.",
+    image: "/images/step-carrier.jpg",
+    imageAlt: "Delivery van being loaded with parcels for hyperlocal delivery",
   },
   {
     step: "03",
@@ -23,6 +27,8 @@ const steps = [
     title: "Launch Your Branded Experience",
     description:
       "Your customers get a polished delivery experience — live rider tracking, branded pages, and real-time notifications — all under your brand, not ours.",
+    image: "/images/step-tracking.jpg",
+    imageAlt: "Customer browsing branded delivery experience on mobile phone",
   },
   {
     step: "04",
@@ -30,6 +36,8 @@ const steps = [
     title: "Optimize & Scale",
     description:
       "Monitor carrier performance, automate exception handling, and scale to new cities. We grow with you as your quick commerce operations expand.",
+    image: "/images/step-scale.jpg",
+    imageAlt: "Analyzing performance reports and analytics for delivery optimization",
   },
 ];
 
@@ -47,24 +55,40 @@ export default function HowItWorks() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {steps.map((item, idx) => (
-            <div key={item.step} className="relative">
+            <div
+              key={item.step}
+              className="relative bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow group"
+            >
               {idx < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-10 left-full w-full h-0.5 bg-gradient-to-r from-blue/20 to-transparent -translate-x-4" />
+                <div className="hidden lg:block absolute top-24 left-full w-full h-0.5 bg-gradient-to-r from-blue/20 to-transparent -translate-x-3 z-10" />
               )}
-              <div className="text-5xl font-bold text-blue/10 mb-4">
-                {item.step}
+              {/* Image */}
+              <div className="relative h-44 overflow-hidden">
+                <Image
+                  src={item.image}
+                  alt={item.imageAlt}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
+                <div className="absolute top-3 left-3 text-3xl font-bold text-white/30">
+                  {item.step}
+                </div>
+                <div className="absolute bottom-3 left-3 w-10 h-10 rounded-lg bg-white/90 backdrop-blur-sm flex items-center justify-center shadow">
+                  <item.icon className="w-5 h-5 text-blue" />
+                </div>
               </div>
-              <div className="w-12 h-12 rounded-xl bg-blue/10 flex items-center justify-center mb-4">
-                <item.icon className="w-6 h-6 text-blue" />
+              {/* Content */}
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  {item.description}
+                </p>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                {item.title}
-              </h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                {item.description}
-              </p>
             </div>
           ))}
         </div>
