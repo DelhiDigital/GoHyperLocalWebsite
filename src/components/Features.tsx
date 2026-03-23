@@ -41,8 +41,8 @@ const featureSections = [
       },
     ],
     visual: "foundation",
-    image: "/images/dark-store.jpg",
-    imageAlt: "Warehouse shelves organized as dark store fulfillment center",
+    image: "/images/foundation-new.jpg",
+    imageAlt: "Warehouse aisle being set up as a dark store fulfillment center",
   },
   {
     badge: "Delivery Operations",
