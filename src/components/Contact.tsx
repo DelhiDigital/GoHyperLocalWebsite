@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Mail, Phone } from "lucide-react";
+import { Send, Mail } from "lucide-react";
+import Image from "next/image";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -33,13 +34,14 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(267.57% 95.42% at 45.81% 75.5%, #001644 0%, #155FFF 60.78%, #00E6E4 93.43%)",
-        }}
+      {/* Background image */}
+      <Image
+        src="/images/logistics-belt.jpg"
+        alt="Logistics warehouse operations"
+        fill
+        className="object-cover"
       />
+      <div className="absolute inset-0 bg-navy/85" />
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
