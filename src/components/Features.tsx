@@ -14,6 +14,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const featureSections = [
   {
@@ -40,6 +41,8 @@ const featureSections = [
       },
     ],
     visual: "foundation",
+    image: "/images/dark-store.jpg",
+    imageAlt: "Warehouse shelves organized as dark store fulfillment center",
   },
   {
     badge: "Delivery Operations",
@@ -65,6 +68,8 @@ const featureSections = [
       },
     ],
     visual: "delivery",
+    image: "/images/logistics-belt.jpg",
+    imageAlt: "Logistics warehouse with organized fulfillment shelves",
   },
   {
     badge: "Customer Experience",
@@ -90,15 +95,19 @@ const featureSections = [
       },
     ],
     visual: "customer",
+    image: "/images/phone-tracking.jpg",
+    imageAlt: "Delivery person checking parcels with tablet for real-time tracking",
   },
 ];
 
-function FeatureVisual({ type }: { type: string }) {
+function FeatureVisual({ type, image, imageAlt }: { type: string; image: string; imageAlt: string }) {
   if (type === "foundation") {
     return (
-      <div className="bg-gradient-to-br from-navy/5 to-blue/5 rounded-2xl p-6 h-full min-h-[320px] flex items-center justify-center">
-        <div className="space-y-4 w-full max-w-xs">
-          <div className="bg-white rounded-xl shadow-md p-4 border border-gray-100">
+      <div className="rounded-2xl h-full min-h-[320px] flex items-center justify-center relative overflow-hidden">
+        <Image src={image} alt={imageAlt} fill className="object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/40 to-navy/20" />
+        <div className="space-y-4 w-full max-w-xs relative z-10 p-6">
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-md p-4 border border-gray-100">
             <div className="flex items-center gap-3 mb-3">
               <MapPin className="w-5 h-5 text-blue" />
               <span className="text-sm font-semibold text-gray-900">
@@ -116,7 +125,7 @@ function FeatureVisual({ type }: { type: string }) {
               ))}
             </div>
           </div>
-          <div className="bg-white rounded-xl shadow-md p-4 border border-gray-100">
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-md p-4 border border-gray-100">
             <div className="flex items-center justify-between">
               <span className="text-sm text-gray-600">Estimated ETA</span>
               <span className="text-lg font-bold text-green-600">18 min</span>
@@ -132,9 +141,11 @@ function FeatureVisual({ type }: { type: string }) {
 
   if (type === "delivery") {
     return (
-      <div className="bg-gradient-to-br from-navy/5 to-blue/5 rounded-2xl p-6 h-full min-h-[320px] flex items-center justify-center">
-        <div className="space-y-4 w-full max-w-xs">
-          <div className="bg-white rounded-xl shadow-md p-4 border border-gray-100">
+      <div className="rounded-2xl h-full min-h-[320px] flex items-center justify-center relative overflow-hidden">
+        <Image src={image} alt={imageAlt} fill className="object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/40 to-navy/20" />
+        <div className="space-y-4 w-full max-w-xs relative z-10 p-6">
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-md p-4 border border-gray-100">
             <div className="flex items-center justify-between mb-3">
               <span className="text-sm font-semibold text-gray-900">
                 Carrier Status
@@ -165,7 +176,7 @@ function FeatureVisual({ type }: { type: string }) {
               )
             )}
           </div>
-          <div className="bg-white rounded-xl shadow-md p-4 border border-gray-100 flex items-center gap-3">
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-md p-4 border border-gray-100 flex items-center gap-3">
             <RefreshCw className="w-5 h-5 text-blue" />
             <div>
               <div className="text-sm font-medium text-gray-900">
@@ -182,9 +193,11 @@ function FeatureVisual({ type }: { type: string }) {
   }
 
   return (
-    <div className="bg-gradient-to-br from-navy/5 to-blue/5 rounded-2xl p-6 h-full min-h-[320px] flex items-center justify-center">
-      <div className="space-y-4 w-full max-w-xs">
-        <div className="bg-white rounded-xl shadow-md p-4 border border-gray-100">
+    <div className="rounded-2xl h-full min-h-[320px] flex items-center justify-center relative overflow-hidden">
+      <Image src={image} alt={imageAlt} fill className="object-cover" />
+      <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/40 to-navy/20" />
+      <div className="space-y-4 w-full max-w-xs relative z-10 p-6">
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-md p-4 border border-gray-100">
           <div className="text-sm font-semibold text-gray-900 mb-3">
             Your Brand — Live Tracking
           </div>
@@ -265,7 +278,7 @@ export default function Features() {
                 </Link>
               </div>
               <div className={idx % 2 === 1 ? "lg:order-1" : ""}>
-                <FeatureVisual type={section.visual} />
+                <FeatureVisual type={section.visual} image={section.image} imageAlt={section.imageAlt} />
               </div>
             </div>
           ))}

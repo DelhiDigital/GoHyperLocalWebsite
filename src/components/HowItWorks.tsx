@@ -1,5 +1,6 @@
 import { Store, Truck, Monitor, BarChart3 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const steps = [
   {
@@ -68,10 +69,30 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        <div className="text-center">
-          <Link href="#contact" className="btn-gradient inline-block">
-            Get Started
-          </Link>
+        {/* Image banner */}
+        <div className="relative rounded-2xl overflow-hidden h-64 mb-12">
+          <Image
+            src="/images/delivery-box.jpg"
+            alt="Packing and preparing parcels for quick commerce delivery"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy/80 to-navy/40 flex items-center">
+            <div className="px-8 sm:px-12">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+                Ready to go live?
+              </h3>
+              <p className="text-white/70 max-w-md mb-4">
+                Most brands launch their quick commerce operations with us in under 2 weeks.
+              </p>
+              <Link
+                href="#contact"
+                className="inline-block bg-white text-navy font-semibold px-6 py-2.5 rounded-lg hover:bg-white/90 transition-colors"
+              >
+                Get Started
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </section>
