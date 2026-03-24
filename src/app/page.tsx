@@ -7,6 +7,7 @@ import USP from "@/components/USP";
 import HowItWorks from "@/components/HowItWorks";
 import Stats from "@/components/Stats";
 import FAQ from "@/components/FAQ";
+import OrbitalIntegrations from "@/components/OrbitalIntegrations";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -86,6 +87,7 @@ export default function Home() {
         <Features />
         <HowItWorks />
         <ProductPillars />
+        <OrbitalIntegrations />
         <USP />
         <Stats />
         <Testimonials />
