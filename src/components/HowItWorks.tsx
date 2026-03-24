@@ -11,7 +11,7 @@ const steps = [
       "Configure your retail stores or warehouses as fulfillment centers. Define delivery zones and serviceability polygons.",
     image: "/images/foundation-new.jpg",
     imageAlt: "Warehouse aisle set up as dark store fulfillment center",
-    color: "from-blue-500 to-blue-600",
+    color: "bg-blue-600",
   },
   {
     step: "02",
@@ -20,8 +20,8 @@ const steps = [
     description:
       "Tell us your carriers — or let us recommend. We handle integration and onboarding tailored to your operations.",
     image: "/images/delivery-van.jpg",
-    imageAlt: "Delivery van loaded with parcels for hyperlocal delivery",
-    color: "from-violet-500 to-violet-600",
+    imageAlt: "Warehouse shelves organized for carrier fulfillment operations",
+    color: "bg-violet-600",
   },
   {
     step: "03",
@@ -31,7 +31,7 @@ const steps = [
       "Your customers get a polished experience — live rider tracking, branded pages, real-time notifications under your brand.",
     image: "/images/mobile-tracking.jpg",
     imageAlt: "Customer using branded delivery tracking on mobile phone",
-    color: "from-emerald-500 to-emerald-600",
+    color: "bg-emerald-600",
   },
   {
     step: "04",
@@ -41,7 +41,7 @@ const steps = [
       "Monitor carrier performance, automate exception handling, and expand to new cities as your operations grow.",
     image: "/images/team-collab.jpg",
     imageAlt: "Team collaborating on logistics optimization and scaling",
-    color: "from-amber-500 to-amber-600",
+    color: "bg-amber-600",
   },
 ];
 
@@ -77,9 +77,9 @@ export default function HowItWorks() {
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/70 via-navy/20 to-transparent" />
+                <div className="absolute inset-0 bg-navy/50" />
                 <div className="absolute top-4 left-4">
-                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-lg`}>
+                  <div className={`w-10 h-10 rounded-xl ${item.color} flex items-center justify-center shadow-lg`}>
                     <item.icon className="w-5 h-5 text-white" />
                   </div>
                 </div>
@@ -108,7 +108,7 @@ export default function HowItWorks() {
             fill
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/80 to-primary/60" />
+          <div className="absolute inset-0 bg-navy/85" />
           <div className="relative px-8 sm:px-12 py-12 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">

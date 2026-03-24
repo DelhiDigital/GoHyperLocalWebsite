@@ -10,7 +10,7 @@ const testimonials = [
     name: "Raghav S.",
     role: "Logistics Lead",
     initials: "RS",
-    gradient: "from-blue-500 to-blue-600",
+    bg: "bg-blue-600",
   },
   {
     quote:
@@ -18,7 +18,7 @@ const testimonials = [
     name: "Meera T.",
     role: "Head of Operations",
     initials: "MT",
-    gradient: "from-violet-500 to-violet-600",
+    bg: "bg-violet-600",
   },
   {
     quote:
@@ -26,7 +26,7 @@ const testimonials = [
     name: "Karthik D.",
     role: "Co-founder & CTO",
     initials: "KD",
-    gradient: "from-emerald-500 to-emerald-600",
+    bg: "bg-emerald-600",
   },
   {
     quote:
@@ -34,7 +34,7 @@ const testimonials = [
     name: "Priya N.",
     role: "Supply Chain Manager",
     initials: "PN",
-    gradient: "from-amber-500 to-amber-600",
+    bg: "bg-amber-600",
   },
 ];
 
@@ -74,7 +74,7 @@ export default function Testimonials() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div
-                  className={`w-12 h-12 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center text-white font-bold text-sm shadow-sm`}
+                  className={`w-12 h-12 rounded-full ${t.bg} flex items-center justify-center text-white font-bold text-sm shadow-sm`}
                 >
                   {t.initials}
                 </div>

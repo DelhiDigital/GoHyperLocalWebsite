@@ -31,7 +31,7 @@ export default function USP() {
   return (
     <section id="why-us" className="relative py-20 lg:py-28 overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-light to-navy" />
+      <div className="absolute inset-0 bg-navy" />
       <div className="absolute inset-0 opacity-10">
         <Image
           src="/images/city-aerial.jpg"

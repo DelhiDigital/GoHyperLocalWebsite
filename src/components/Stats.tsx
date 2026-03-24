@@ -5,25 +5,25 @@ const stats = [
     icon: TrendingUp,
     value: "$5.5B",
     label: "Quick commerce market in India by 2025",
-    gradient: "from-blue-500 to-blue-600",
+    solid: "bg-blue-600",
   },
   {
     icon: Clock,
     value: "42%",
     label: "YoY growth in same-day hyperlocal orders",
-    gradient: "from-violet-500 to-violet-600",
+    solid: "bg-violet-600",
   },
   {
     icon: Users,
     value: "61%",
     label: "Shoppers expect delivery under 3 hours",
-    gradient: "from-emerald-500 to-emerald-600",
+    solid: "bg-emerald-600",
   },
   {
     icon: Package,
     value: "30%",
     label: "Higher repeat rate with branded tracking",
-    gradient: "from-amber-500 to-amber-600",
+    solid: "bg-amber-600",
   },
 ];
 
@@ -51,7 +51,7 @@ export default function Stats() {
               key={stat.label}
               className="bg-white rounded-2xl p-8 border border-border text-center card-hover"
             >
-              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${stat.gradient} flex items-center justify-center mx-auto mb-5 shadow-sm`}>
+              <div className={`w-14 h-14 rounded-2xl ${stat.solid} flex items-center justify-center mx-auto mb-5 shadow-sm`}>
                 <stat.icon className="w-6 h-6 text-white" />
               </div>
               <div className="text-3xl lg:text-4xl font-extrabold text-navy mb-2">

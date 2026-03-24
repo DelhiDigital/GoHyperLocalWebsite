@@ -40,7 +40,7 @@ export default function Contact() {
         className="object-cover"
         aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-gradient-to-br from-navy/95 via-navy/90 to-primary/80" />
+      <div className="absolute inset-0 bg-navy/92" />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-5 gap-12 items-start">

@@ -7,7 +7,7 @@ const pillars = [
     title: "Serviceability API",
     description:
       "Real-time rider availability, pricing, and pickup ETA checks before shipment creation.",
-    gradient: "from-blue-500 to-blue-600",
+    solid: "bg-blue-600",
     bg: "bg-blue-50",
   },
   {
@@ -15,7 +15,7 @@ const pillars = [
     title: "Smart Carrier Selection",
     description:
       "Auto-assign carriers based on dark store config, rider availability, and delivery speed.",
-    gradient: "from-violet-500 to-violet-600",
+    solid: "bg-violet-600",
     bg: "bg-violet-50",
   },
   {
@@ -23,7 +23,7 @@ const pillars = [
     title: "Real-Time Tracking",
     description:
       "Accurate ETAs on product pages and live tracking with embedded map view for customers.",
-    gradient: "from-emerald-500 to-emerald-600",
+    solid: "bg-emerald-600",
     bg: "bg-emerald-50",
   },
   {
@@ -31,7 +31,7 @@ const pillars = [
     title: "Exception Management",
     description:
       "Handle failed deliveries, reschedules, and address issues without manual intervention.",
-    gradient: "from-amber-500 to-amber-600",
+    solid: "bg-amber-600",
     bg: "bg-amber-50",
   },
 ];
@@ -59,7 +59,7 @@ export default function ProductPillars() {
               key={pillar.title}
               className="bg-white rounded-2xl border border-border p-7 card-hover group"
             >
-              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${pillar.gradient} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-sm`}>
+              <div className={`w-14 h-14 rounded-2xl ${pillar.solid} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-sm`}>
                 <pillar.icon className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-lg font-bold text-navy mb-2">

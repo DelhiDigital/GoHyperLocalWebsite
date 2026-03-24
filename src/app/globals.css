@@ -32,12 +32,9 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 10px; }
 
-/* Gradient text utility */
+/* Accent text utility */
 .gradient-text {
-  background: linear-gradient(135deg, #2563EB 0%, #06B6D4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-primary);
 }
 
 /* Buttons */

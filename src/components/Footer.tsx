@@ -38,7 +38,7 @@ export default function Footer() {
                 href="https://www.instagram.com/delhidigitalco/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-white/8 flex items-center justify-center text-white/50 hover:text-white hover:bg-gradient-to-br hover:from-purple-600 hover:to-pink-500 transition-all"
+                className="w-10 h-10 rounded-xl bg-white/8 flex items-center justify-center text-white/50 hover:text-white hover:bg-pink-600 transition-all"
                 aria-label="Instagram"
               >
                 <FaInstagram className="w-4 h-4" />
