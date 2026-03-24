@@ -195,8 +195,8 @@ export default function Hero() {
 
               <p className="text-xs text-muted text-center mt-4">
                 Or call us directly at{" "}
-                <a href="tel:+919220592205" className="text-primary font-medium hover:underline">
-                  +91 92205 92205
+                <a href="tel:+919205110208" className="text-primary font-medium hover:underline">
+                  +91 92051 10208
                 </a>
               </p>
             </form>

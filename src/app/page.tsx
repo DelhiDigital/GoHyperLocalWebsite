@@ -25,7 +25,7 @@ export default function Home() {
               "GoHyperLocal powers ultra-fast hyperlocal deliveries with real-time tracking, smart carrier switching, accurate ETAs, and a branded customer-facing delivery experience for D2C quick commerce.",
             contactPoint: {
               "@type": "ContactPoint",
-              telephone: "+91-92205-92205",
+              telephone: "+91-92051-10208",
               contactType: "sales",
               email: "hello@delhidigital.co",
             },

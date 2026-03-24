@@ -69,13 +69,13 @@ export default function Contact() {
                 <span className="text-sm font-medium">hello@delhidigital.co</span>
               </a>
               <a
-                href="tel:+919220592205"
+                href="tel:+919205110208"
                 className="flex items-center gap-3 text-white/70 hover:text-white transition-colors group"
               >
                 <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
                   <Phone className="w-5 h-5" />
                 </div>
-                <span className="text-sm font-medium">+91 92205 92205</span>
+                <span className="text-sm font-medium">+91 92051 10208</span>
               </a>
             </div>
           </div>
