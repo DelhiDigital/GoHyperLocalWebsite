@@ -1,17 +1,7 @@
 import {
-  Store,
-  MapPin,
-  Navigation,
-  Hexagon,
-  UserCheck,
-  ShieldCheck,
-  Clock,
-  RefreshCw,
-  Map,
-  Smartphone,
-  Layers,
-  MessageSquare,
-  CheckCircle2,
+  Store, MapPin, Navigation, Hexagon,
+  UserCheck, ShieldCheck, Clock, RefreshCw,
+  Map, Smartphone, Layers, MessageSquare,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -19,266 +9,123 @@ import Image from "next/image";
 const featureSections = [
   {
     badge: "Foundation",
-    title: "Build your quick commerce foundation",
+    title: "Build Your Quick Commerce Infrastructure",
     description:
-      "Set up your hyperlocal infrastructure with dark store management, precise serviceability, and accurate ETAs — everything you need to get started.",
+      "Set up your hyperlocal backbone — dark stores, delivery zones, and accurate ETAs powered by real-time data.",
     items: [
-      {
-        icon: Store,
-        text: "Convert retail stores into dark stores or fulfillment centers",
-      },
-      {
-        icon: Clock,
-        text: "Display accurate delivery ETAs on product pages based on location",
-      },
-      {
-        icon: Navigation,
-        text: "Auto-select the nearest serviceable store for each order",
-      },
-      {
-        icon: Hexagon,
-        text: "Configure polygon-level delivery zones for precise serviceability",
-      },
+      { icon: Store, text: "Convert retail stores into dark stores or micro-fulfillment centers" },
+      { icon: Clock, text: "Show accurate delivery ETAs on product pages based on customer location" },
+      { icon: Navigation, text: "Auto-select the nearest serviceable store for every order" },
+      { icon: Hexagon, text: "Configure polygon-level delivery zones for precise serviceability" },
     ],
-    visual: "foundation",
-    image: "/images/foundation-new.jpg",
-    imageAlt: "Warehouse aisle being set up as a dark store fulfillment center",
+    image: "/images/modern-warehouse.jpg",
+    imageAlt: "Modern warehouse set up as a dark store for quick commerce fulfillment",
   },
   {
     badge: "Delivery Operations",
-    title: "Hyperlocal deliveries that build loyalty",
+    title: "Hyperlocal Deliveries That Build Loyalty",
     description:
       "Ensure every order gets picked up and delivered on time with smart carrier management and automatic failover.",
     items: [
-      {
-        icon: UserCheck,
-        text: "Check rider availability before creating shipments",
-      },
-      {
-        icon: ShieldCheck,
-        text: "Reduce failed pickups with real-time carrier capacity checks",
-      },
-      {
-        icon: Clock,
-        text: "Ensure orders don't sit idle at stores waiting for pickup",
-      },
-      {
-        icon: RefreshCw,
-        text: "Automatic carrier switching if riders don't show up",
-      },
+      { icon: UserCheck, text: "Check rider availability in real-time before creating shipments" },
+      { icon: ShieldCheck, text: "Reduce failed pickups with live carrier capacity checks" },
+      { icon: Clock, text: "Prevent orders from sitting idle at stores waiting for pickup" },
+      { icon: RefreshCw, text: "Automatic carrier switching when riders don't show up" },
     ],
-    visual: "delivery",
-    image: "/images/logistics-belt.jpg",
-    imageAlt: "Logistics warehouse with organized fulfillment shelves",
+    image: "/images/parcels-closeup.jpg",
+    imageAlt: "Parcels being prepared and sorted for hyperlocal delivery operations",
   },
   {
     badge: "Customer Experience",
-    title: "Keep customers in the know",
+    title: "A Delivery Experience Your Customers Love",
     description:
-      "Unlike other platforms, we build a beautiful, branded customer-facing delivery experience — live maps, real-time updates, and full transparency.",
+      "We build a branded customer-facing frontend — live maps, real-time updates, and full transparency under your brand.",
     items: [
-      {
-        icon: Map,
-        text: "Live rider tracking with map view on branded tracking pages",
-      },
-      {
-        icon: Smartphone,
-        text: "Embeddable map widget for your mobile app",
-      },
-      {
-        icon: Layers,
-        text: "Standardized delivery statuses across all carriers",
-      },
-      {
-        icon: MessageSquare,
-        text: "Multi-channel notifications via WhatsApp, SMS, and email",
-      },
+      { icon: Map, text: "Live rider tracking with interactive map on branded pages" },
+      { icon: Smartphone, text: "Embeddable tracking widget for your mobile app" },
+      { icon: Layers, text: "Unified delivery statuses across all carrier partners" },
+      { icon: MessageSquare, text: "Multi-channel alerts via WhatsApp, SMS, and email" },
     ],
-    visual: "customer",
-    image: "/images/phone-tracking.jpg",
-    imageAlt: "Delivery person checking parcels with tablet for real-time tracking",
+    image: "/images/ecommerce-packing.jpg",
+    imageAlt: "Online shopping and ecommerce delivery experience",
   },
 ];
 
-function FeatureVisual({ type, image, imageAlt }: { type: string; image: string; imageAlt: string }) {
-  if (type === "foundation") {
-    return (
-      <div className="rounded-2xl h-full min-h-[320px] flex items-center justify-center relative overflow-hidden">
-        <Image src={image} alt={imageAlt} fill className="object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/40 to-navy/20" />
-        <div className="space-y-4 w-full max-w-xs relative z-10 p-6">
-          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-md p-4 border border-gray-100">
-            <div className="flex items-center gap-3 mb-3">
-              <MapPin className="w-5 h-5 text-blue" />
-              <span className="text-sm font-semibold text-gray-900">
-                Dark Store Config
-              </span>
-            </div>
-            <div className="grid grid-cols-3 gap-2">
-              {["Zone A", "Zone B", "Zone C"].map((z) => (
-                <div
-                  key={z}
-                  className="bg-blue/10 rounded-lg p-2 text-center text-xs font-medium text-blue"
-                >
-                  {z}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-md p-4 border border-gray-100">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600">Estimated ETA</span>
-              <span className="text-lg font-bold text-green-600">18 min</span>
-            </div>
-            <div className="mt-2 h-2 bg-gray-100 rounded-full overflow-hidden">
-              <div className="h-full w-3/4 bg-gradient-to-r from-blue to-cyan rounded-full" />
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "delivery") {
-    return (
-      <div className="rounded-2xl h-full min-h-[320px] flex items-center justify-center relative overflow-hidden">
-        <Image src={image} alt={imageAlt} fill className="object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/40 to-navy/20" />
-        <div className="space-y-4 w-full max-w-xs relative z-10 p-6">
-          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-md p-4 border border-gray-100">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-sm font-semibold text-gray-900">
-                Carrier Status
-              </span>
-              <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
-                3 Available
-              </span>
-            </div>
-            {["Rider A — 2 min away", "Rider B — 5 min away", "Rider C — Standby"].map(
-              (r, i) => (
-                <div
-                  key={r}
-                  className={`flex items-center gap-2 py-2 ${
-                    i < 2 ? "border-b border-gray-50" : ""
-                  }`}
-                >
-                  <div
-                    className={`w-2 h-2 rounded-full ${
-                      i === 0
-                        ? "bg-green-500"
-                        : i === 1
-                        ? "bg-yellow-500"
-                        : "bg-gray-300"
-                    }`}
-                  />
-                  <span className="text-sm text-gray-700">{r}</span>
-                </div>
-              )
-            )}
-          </div>
-          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-md p-4 border border-gray-100 flex items-center gap-3">
-            <RefreshCw className="w-5 h-5 text-blue" />
-            <div>
-              <div className="text-sm font-medium text-gray-900">
-                Auto-Switch Active
-              </div>
-              <div className="text-xs text-gray-500">
-                Fallback to next carrier in 3 min
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="rounded-2xl h-full min-h-[320px] flex items-center justify-center relative overflow-hidden">
-      <Image src={image} alt={imageAlt} fill className="object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/40 to-navy/20" />
-      <div className="space-y-4 w-full max-w-xs relative z-10 p-6">
-        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-md p-4 border border-gray-100">
-          <div className="text-sm font-semibold text-gray-900 mb-3">
-            Your Brand — Live Tracking
-          </div>
-          <div className="bg-gradient-to-br from-blue/10 to-cyan/10 rounded-lg h-32 relative overflow-hidden mb-3">
-            <div className="absolute top-1/2 left-1/4 w-6 h-6 bg-blue rounded-full flex items-center justify-center shadow animate-pulse">
-              <div className="w-2 h-2 bg-white rounded-full" />
-            </div>
-            <div className="absolute bottom-4 right-4 w-4 h-4 bg-cyan rounded-full shadow" />
-          </div>
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-600">Arriving in</span>
-            <span className="font-bold text-navy">8 minutes</span>
-          </div>
-        </div>
-        <div className="flex gap-2">
-          {["WhatsApp", "SMS", "Email"].map((ch) => (
-            <div
-              key={ch}
-              className="flex-1 bg-white rounded-lg shadow-sm p-2 text-center border border-gray-100"
-            >
-              <CheckCircle2 className="w-4 h-4 text-green-500 mx-auto mb-1" />
-              <span className="text-xs text-gray-600">{ch}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function Features() {
   return (
-    <section id="features" className="py-20 bg-white">
+    <section id="features" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-navy mb-4">
-            Launch and scale your quick commerce operations
+        {/* Section header */}
+        <div className="text-center mb-16 lg:mb-20">
+          <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 rounded-full px-4 py-1.5 mb-4">
+            <span className="text-sm font-semibold text-primary">Platform Features</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy mb-4 tracking-tight">
+            Everything You Need to Launch
+            <br className="hidden sm:block" />
+            <span className="gradient-text"> Quick Commerce</span>
           </h2>
-          <p className="text-lg text-gray-medium max-w-2xl mx-auto">
-            Everything you need to power hyperlocal deliveries — from backend
-            logistics intelligence to the customer-facing delivery experience.
+          <p className="text-lg text-muted max-w-2xl mx-auto">
+            From backend logistics intelligence to a customer-facing delivery experience — all in one platform.
           </p>
         </div>
 
-        <div className="space-y-24">
+        {/* Feature sections */}
+        <div className="space-y-20 lg:space-y-32">
           {featureSections.map((section, idx) => (
             <div
               key={section.title}
-              className={`grid lg:grid-cols-2 gap-12 items-center ${
+              className={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center ${
                 idx % 2 === 1 ? "lg:flex-row-reverse" : ""
               }`}
             >
+              {/* Text side */}
               <div className={idx % 2 === 1 ? "lg:order-2" : ""}>
-                <span className="inline-block text-sm font-semibold text-blue bg-blue/10 px-3 py-1 rounded-full mb-4">
-                  {section.badge}
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-bold text-navy mb-4">
+                <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 rounded-full px-3 py-1 mb-4">
+                  <span className="text-xs font-semibold text-primary uppercase tracking-wider">
+                    {section.badge}
+                  </span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-navy mb-4 tracking-tight leading-tight">
                   {section.title}
                 </h3>
-                <p className="text-gray-medium mb-6 leading-relaxed">
+                <p className="text-muted mb-8 leading-relaxed text-base">
                   {section.description}
                 </p>
                 <ul className="space-y-4 mb-8">
                   {section.items.map((item) => (
                     <li key={item.text} className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-blue/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <item.icon className="w-4 h-4 text-blue" />
+                      <div className="w-9 h-9 rounded-xl bg-primary/8 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <item.icon className="w-4.5 h-4.5 text-primary" />
                       </div>
-                      <span className="text-gray-700">{item.text}</span>
+                      <span className="text-foreground text-[15px] leading-relaxed">{item.text}</span>
                     </li>
                   ))}
                 </ul>
                 <Link
                   href="#contact"
-                  className="text-blue font-semibold hover:underline"
+                  className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
                 >
-                  Talk to our experts →
+                  Learn more
+                  <span className="text-lg">→</span>
                 </Link>
               </div>
+
+              {/* Image side */}
               <div className={idx % 2 === 1 ? "lg:order-1" : ""}>
-                <FeatureVisual type={section.visual} image={section.image} imageAlt={section.imageAlt} />
+                <div className="relative group">
+                  <div className="rounded-2xl lg:rounded-3xl overflow-hidden shadow-lg">
+                    <Image
+                      src={section.image}
+                      alt={section.imageAlt}
+                      width={640}
+                      height={440}
+                      className="object-cover w-full h-[320px] lg:h-[420px] group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                  {/* Decorative accent */}
+                  <div className={`absolute -z-10 w-full h-full rounded-2xl lg:rounded-3xl top-4 ${idx % 2 === 0 ? "left-4" : "-left-4"} bg-primary/10`} />
+                </div>
               </div>
             </div>
           ))}

@@ -10,7 +10,7 @@ const testimonials = [
     name: "Raghav S.",
     role: "Logistics Lead",
     initials: "RS",
-    color: "bg-blue",
+    gradient: "from-blue-500 to-blue-600",
   },
   {
     quote:
@@ -18,7 +18,7 @@ const testimonials = [
     name: "Meera T.",
     role: "Head of Operations",
     initials: "MT",
-    color: "bg-violet-500",
+    gradient: "from-violet-500 to-violet-600",
   },
   {
     quote:
@@ -26,7 +26,7 @@ const testimonials = [
     name: "Karthik D.",
     role: "Co-founder & CTO",
     initials: "KD",
-    color: "bg-emerald-500",
+    gradient: "from-emerald-500 to-emerald-600",
   },
   {
     quote:
@@ -34,7 +34,7 @@ const testimonials = [
     name: "Priya N.",
     role: "Supply Chain Manager",
     initials: "PN",
-    color: "bg-amber-500",
+    gradient: "from-amber-500 to-amber-600",
   },
 ];
 
@@ -49,45 +49,55 @@ export default function Testimonials() {
   const t = testimonials[current];
 
   return (
-    <section className="py-20 bg-gray-light">
+    <section className="py-20 lg:py-28 bg-surface">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl font-bold text-navy text-center mb-12">
-          What our customers say
-        </h2>
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 rounded-full px-4 py-1.5 mb-4">
+            <span className="text-sm font-semibold text-primary">Testimonials</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy tracking-tight">
+            Trusted by <span className="gradient-text">Operations Teams</span>
+          </h2>
+        </div>
 
         <div className="relative">
-          <div className="bg-white rounded-2xl shadow-lg p-8 sm:p-12 border border-gray-100">
-            <Quote className="w-8 h-8 text-blue/15 mb-4" />
-            <blockquote className="text-lg sm:text-xl text-gray-700 leading-relaxed mb-8">
-              {t.quote}
+          <div className="bg-white rounded-3xl shadow-sm p-8 sm:p-12 border border-border">
+            {/* Quote icon */}
+            <div className="w-12 h-12 rounded-2xl bg-primary/8 flex items-center justify-center mb-6">
+              <Quote className="w-5 h-5 text-primary" />
+            </div>
+
+            <blockquote className="text-lg sm:text-xl text-foreground leading-relaxed mb-8 font-medium">
+              &ldquo;{t.quote}&rdquo;
             </blockquote>
 
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div
-                  className={`w-12 h-12 rounded-full ${t.color} flex items-center justify-center text-white font-semibold text-sm`}
+                  className={`w-12 h-12 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center text-white font-bold text-sm shadow-sm`}
                 >
                   {t.initials}
                 </div>
                 <div>
-                  <div className="font-semibold text-gray-900">{t.name}</div>
-                  <div className="text-sm text-gray-500">{t.role}</div>
+                  <div className="font-semibold text-navy">{t.name}</div>
+                  <div className="text-sm text-muted">{t.role}</div>
                 </div>
               </div>
+
               <div className="flex items-center gap-2">
                 <button
                   onClick={prev}
-                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                  className="w-10 h-10 rounded-xl border border-border flex items-center justify-center hover:bg-surface hover:border-primary/30 transition-all"
                   aria-label="Previous testimonial"
                 >
-                  <ChevronLeft className="w-5 h-5 text-gray-600" />
+                  <ChevronLeft className="w-5 h-5 text-muted" />
                 </button>
                 <button
                   onClick={next}
-                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                  className="w-10 h-10 rounded-xl border border-border flex items-center justify-center hover:bg-surface hover:border-primary/30 transition-all"
                   aria-label="Next testimonial"
                 >
-                  <ChevronRight className="w-5 h-5 text-gray-600" />
+                  <ChevronRight className="w-5 h-5 text-muted" />
                 </button>
               </div>
             </div>
@@ -101,7 +111,7 @@ export default function Testimonials() {
                 onClick={() => setCurrent(i)}
                 aria-label={`Go to testimonial ${i + 1}`}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  i === current ? "w-6 bg-blue" : "w-2 bg-gray-300"
+                  i === current ? "w-8 bg-primary" : "w-2 bg-border"
                 }`}
               />
             ))}

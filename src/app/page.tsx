@@ -7,7 +7,6 @@ import USP from "@/components/USP";
 import HowItWorks from "@/components/HowItWorks";
 import Stats from "@/components/Stats";
 import FAQ from "@/components/FAQ";
-import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -24,13 +23,16 @@ export default function Home() {
             url: "https://gohyperlocal.com",
             description:
               "GoHyperLocal powers ultra-fast hyperlocal deliveries with real-time tracking, smart carrier switching, accurate ETAs, and a branded customer-facing delivery experience for D2C quick commerce.",
-            sameAs: [],
-            offers: {
-              "@type": "Offer",
-              name: "Quick Commerce Logistics Platform",
-              description:
-                "End-to-end logistics intelligence and customer delivery experience platform for quick commerce and express delivery.",
+            contactPoint: {
+              "@type": "ContactPoint",
+              telephone: "+91-92205-92205",
+              contactType: "sales",
+              email: "hello@delhidigital.co",
             },
+            sameAs: [
+              "https://in.linkedin.com/company/delhidigitalco",
+              "https://www.instagram.com/delhidigitalco/",
+            ],
           }),
         }}
       />
@@ -81,14 +83,13 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <Testimonials />
         <Features />
+        <HowItWorks />
         <ProductPillars />
         <USP />
-        <HowItWorks />
         <Stats />
+        <Testimonials />
         <FAQ />
-        <Contact />
       </main>
       <Footer />
     </>
