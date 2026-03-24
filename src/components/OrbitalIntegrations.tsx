@@ -40,7 +40,7 @@ const innerRing: Brand[] = [
 
 function BrandIcon({ brand, size }: { brand: Brand; size: number }) {
   const iconData = brand.icon ? brandIcons[brand.icon] : null;
-  const iconSize = size * 0.45;
+  const iconSize = size * 0.65;
 
   if (iconData) {
     return (
@@ -52,8 +52,8 @@ function BrandIcon({ brand, size }: { brand: Brand; size: number }) {
 
   return (
     <span
-      className="font-bold leading-none"
-      style={{ color: brand.color, fontSize: iconSize * 0.55 }}
+      className="font-extrabold leading-none"
+      style={{ color: brand.color, fontSize: iconSize * 0.5 }}
     >
       {brand.fallback || brand.name[0]}
     </span>
