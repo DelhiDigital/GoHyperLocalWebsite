@@ -32,16 +32,16 @@ export default function USP() {
   return (
     <section id="why-us" className="relative py-20 lg:py-28 overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-navy" />
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0">
         <Image
-          src="/images/city-aerial.jpg"
+          src="/images/image.png"
           alt=""
           fill
           className="object-cover"
           aria-hidden="true"
         />
       </div>
+      <div className="absolute inset-0 bg-navy/85" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center mb-14">
