@@ -39,9 +39,59 @@ const faqs = [
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+  // Split FAQs into two columns
+  const leftFaqs = faqs.filter((_, i) => i % 2 === 0);
+  const rightFaqs = faqs.filter((_, i) => i % 2 === 1);
+
+  const FaqItem = ({ faq, index }: { faq: typeof faqs[0]; index: number }) => (
+    <div
+      className={`rounded-2xl border transition-all duration-300 ${
+        openIndex === index
+          ? "border-primary/20 bg-primary/[0.02] shadow-sm"
+          : "border-border bg-white hover:border-primary/10"
+      }`}
+    >
+      <button
+        onClick={() => setOpenIndex(openIndex === index ? null : index)}
+        className="w-full flex items-center justify-between p-5 text-left"
+        aria-expanded={openIndex === index}
+      >
+        <span
+          className={`font-semibold pr-4 text-sm transition-colors ${
+            openIndex === index ? "text-primary" : "text-navy"
+          }`}
+        >
+          {faq.question}
+        </span>
+        <div
+          className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 transition-all ${
+            openIndex === index
+              ? "bg-primary text-white"
+              : "bg-surface text-muted"
+          }`}
+        >
+          {openIndex === index ? (
+            <Minus className="w-3.5 h-3.5" />
+          ) : (
+            <Plus className="w-3.5 h-3.5" />
+          )}
+        </div>
+      </button>
+      <div
+        className={`overflow-hidden transition-all duration-300 ${
+          openIndex === index ? "max-h-96" : "max-h-0"
+        }`}
+      >
+        <div className="px-5 pb-5 text-muted text-sm leading-relaxed">
+          {faq.answer}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <section id="faq" className="py-20 lg:py-28 bg-white">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 rounded-full px-4 py-1.5 mb-4">
             <span className="text-sm font-semibold text-primary">FAQ</span>
@@ -54,49 +104,19 @@ export default function FAQ() {
           </p>
         </div>
 
-        <div className="space-y-3">
-          {faqs.map((faq, i) => (
-            <div
-              key={i}
-              className={`rounded-2xl border transition-all duration-300 ${
-                openIndex === i
-                  ? "border-primary/20 bg-primary/[0.02] shadow-sm"
-                  : "border-border bg-white hover:border-primary/10"
-              }`}
-            >
-              <button
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex items-center justify-between p-5 sm:p-6 text-left"
-                aria-expanded={openIndex === i}
-              >
-                <span className={`font-semibold pr-4 transition-colors ${
-                  openIndex === i ? "text-primary" : "text-navy"
-                }`}>
-                  {faq.question}
-                </span>
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-all ${
-                  openIndex === i
-                    ? "bg-primary text-white rotate-0"
-                    : "bg-surface text-muted"
-                }`}>
-                  {openIndex === i ? (
-                    <Minus className="w-4 h-4" />
-                  ) : (
-                    <Plus className="w-4 h-4" />
-                  )}
-                </div>
-              </button>
-              <div
-                className={`overflow-hidden transition-all duration-300 ${
-                  openIndex === i ? "max-h-96" : "max-h-0"
-                }`}
-              >
-                <div className="px-5 sm:px-6 pb-5 sm:pb-6 text-muted leading-relaxed">
-                  {faq.answer}
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="grid lg:grid-cols-2 gap-4">
+          {/* Left column */}
+          <div className="space-y-4">
+            {leftFaqs.map((faq, i) => (
+              <FaqItem key={i * 2} faq={faq} index={i * 2} />
+            ))}
+          </div>
+          {/* Right column */}
+          <div className="space-y-4">
+            {rightFaqs.map((faq, i) => (
+              <FaqItem key={i * 2 + 1} faq={faq} index={i * 2 + 1} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
