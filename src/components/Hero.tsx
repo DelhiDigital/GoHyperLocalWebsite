@@ -31,75 +31,75 @@ export default function Hero() {
   };
 
   return (
-    <section id="contact" className="relative pt-[72px] overflow-hidden bg-white">
-      {/* Background decorations */}
-      <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/[0.03] rounded-full blur-3xl" />
+    <section id="contact" className="relative pt-[72px] overflow-hidden bg-navy">
+      {/* Subtle background accents */}
+      <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-primary/[0.06] rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/[0.04] rounded-full blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left content */}
           <div>
-            <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 rounded-full px-4 py-1.5 mb-6">
-              <Zap className="w-3.5 h-3.5 text-primary" />
-              <span className="text-sm font-semibold text-primary">
+            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/15 rounded-full px-4 py-1.5 mb-6">
+              <Zap className="w-3.5 h-3.5 text-accent" />
+              <span className="text-sm font-semibold text-accent">
                 Quick Commerce Platform
               </span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6">
-              <span className="text-navy">Power Your</span>
+              <span className="text-white">Power Your</span>
               <br />
-              <span className="gradient-text">Quick Commerce</span>
+              <span className="text-primary-light">Quick Commerce</span>
               <br />
-              <span className="text-navy">Deliveries</span>
+              <span className="text-white">Deliveries</span>
             </h1>
 
-            <p className="text-lg text-muted mb-8 max-w-lg leading-relaxed">
+            <p className="text-lg text-white/60 mb-8 max-w-lg leading-relaxed">
               End-to-end logistics intelligence with a branded customer-facing
               delivery experience. Real-time tracking, smart carrier switching,
               and accurate ETAs — all under your brand.
             </p>
 
-            {/* CTA Buttons */}
+            {/* CTA Button */}
             <div className="flex flex-wrap gap-4 mb-12">
-              <Link href="#features" className="btn-outline">
+              <Link href="#features" className="btn-white">
                 Explore Features
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
 
             {/* Mini stats */}
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border">
+            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <TrendingUp className="w-4 h-4 text-primary" />
-                  <span className="text-2xl font-bold text-navy">30%</span>
+                  <TrendingUp className="w-4 h-4 text-accent" />
+                  <span className="text-2xl font-bold text-white">30%</span>
                 </div>
-                <span className="text-xs text-muted">Higher repeat purchases</span>
+                <span className="text-xs text-white/50">Higher repeat purchases</span>
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <Clock className="w-4 h-4 text-primary" />
-                  <span className="text-2xl font-bold text-navy">10 min</span>
+                  <Clock className="w-4 h-4 text-accent" />
+                  <span className="text-2xl font-bold text-white">10 min</span>
                 </div>
-                <span className="text-xs text-muted">Fastest delivery</span>
+                <span className="text-xs text-white/50">Fastest delivery</span>
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <Zap className="w-4 h-4 text-primary" />
-                  <span className="text-2xl font-bold text-navy">2 weeks</span>
+                  <Zap className="w-4 h-4 text-accent" />
+                  <span className="text-2xl font-bold text-white">2 weeks</span>
                 </div>
-                <span className="text-xs text-muted">Go live timeline</span>
+                <span className="text-xs text-white/50">Go live timeline</span>
               </div>
             </div>
           </div>
 
-          {/* Right — Contact Form */}
+          {/* Right — Contact Form (white card on dark bg) */}
           <div>
             <form
               onSubmit={handleSubmit}
-              className="bg-white rounded-3xl shadow-xl p-8 sm:p-10 border border-border"
+              className="bg-white rounded-3xl shadow-2xl p-8 sm:p-10"
             >
               <h2 className="text-xl font-bold text-navy mb-1">
                 Get Started Today

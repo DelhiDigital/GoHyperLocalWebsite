@@ -40,7 +40,7 @@ export default function Header() {
               height={44}
               className="rounded-lg"
             />
-            <span className={`text-lg font-bold hidden sm:block ${scrolled ? "text-navy" : "text-navy"}`}>
+            <span className={`text-lg font-bold hidden sm:block transition-colors ${scrolled ? "text-navy" : "text-white"}`}>
               GoHyperLocal
             </span>
           </Link>
@@ -53,7 +53,7 @@ export default function Header() {
                 className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
                   scrolled
                     ? "text-muted hover:text-navy hover:bg-surface"
-                    : "text-muted hover:text-navy hover:bg-navy/5"
+                    : "text-white/70 hover:text-white hover:bg-white/10"
                 }`}
               >
                 {link.label}
@@ -64,7 +64,7 @@ export default function Header() {
           <div className="hidden lg:flex items-center gap-3">
             <a
               href="tel:+919220592205"
-              className="flex items-center gap-2 text-sm font-medium text-muted hover:text-navy transition-colors"
+              className={`flex items-center gap-2 text-sm font-medium transition-colors ${scrolled ? "text-muted hover:text-navy" : "text-white/70 hover:text-white"}`}
             >
               <Phone className="w-4 h-4" />
               +91 92205 92205
@@ -80,9 +80,9 @@ export default function Header() {
             aria-label="Toggle menu"
           >
             {mobileOpen ? (
-              <X className="w-6 h-6 text-navy" />
+              <X className={`w-6 h-6 ${scrolled ? "text-navy" : "text-white"}`} />
             ) : (
-              <Menu className="w-6 h-6 text-navy" />
+              <Menu className={`w-6 h-6 ${scrolled ? "text-navy" : "text-white"}`} />
             )}
           </button>
         </div>

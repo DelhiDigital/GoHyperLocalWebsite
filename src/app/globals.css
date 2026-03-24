@@ -12,7 +12,7 @@
   --color-surface: #F8FAFC;
   --color-muted: #64748B;
   --color-border: #E2E8F0;
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-poppins);
 }
 
 html {
