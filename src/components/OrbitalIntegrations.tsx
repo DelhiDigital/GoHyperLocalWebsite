@@ -60,8 +60,60 @@ function BrandIcon({ brand, size }: { brand: Brand; size: number }) {
   );
 }
 
+function OrbitIcon({
+  brand,
+  ringPath,
+  startPercent,
+  duration,
+  reverse,
+  iconSize,
+  visible,
+  delay,
+}: {
+  brand: Brand;
+  ringPath: string;
+  startPercent: number;
+  duration: number;
+  reverse?: boolean;
+  iconSize: number;
+  visible: boolean;
+  delay: number;
+}) {
+  return (
+    <div
+      className="absolute group z-10"
+      style={{
+        offsetPath: ringPath,
+        offsetRotate: "0deg",
+        offsetDistance: `${startPercent}%`,
+        animation: visible
+          ? `${reverse ? "moveReverse" : "moveFwd"} ${duration}s linear infinite`
+          : "none",
+        animationDelay: visible ? `${-startPercent * duration / 100}s` : "0s",
+        opacity: visible ? 1 : 0,
+        transition: `opacity 0.5s ease ${delay}s`,
+      } as React.CSSProperties}
+    >
+      <div
+        className="rounded-full bg-white shadow-lg flex items-center justify-center cursor-default hover:scale-[1.3] transition-transform duration-300 border border-gray-100"
+        style={{ width: iconSize, height: iconSize }}
+      >
+        <BrandIcon brand={brand} size={iconSize} />
+      </div>
+      <div className="absolute -top-9 left-1/2 -translate-x-1/2 bg-white text-navy text-[10px] font-semibold px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none z-50">
+        {brand.name}
+      </div>
+    </div>
+  );
+}
+
 export default function OrbitalIntegrations() {
   const { ref, visible } = useReveal(0.15);
+
+  // Evenly space icons around full ellipse so 4-5 always visible
+  const outerPath = `ellipse(48.75% 71.15% at 50% 100%)`;
+  const middlePath = `ellipse(35% 50.96% at 50% 100%)`;
+  const innerPath = `ellipse(21.25% 30.77% at 50% 100%)`;
 
   return (
     <section className="py-20 lg:py-28 bg-navy relative overflow-hidden">
@@ -80,167 +132,56 @@ export default function OrbitalIntegrations() {
         </div>
 
         {/* Orbital visualization */}
-        <div
-          ref={ref}
-          className="relative mx-auto"
-          style={{ height: 520, maxWidth: 800 }}
-        >
+        <div ref={ref} className="relative mx-auto" style={{ height: 520, maxWidth: 800 }}>
           {/* Arc lines */}
-          <svg
-            className="absolute inset-0 w-full h-full pointer-events-none"
-            viewBox="0 0 800 520"
-            fill="none"
-          >
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 800 520" fill="none">
             <ellipse cx="400" cy="520" rx="390" ry="370" stroke="rgba(6,182,212,0.1)" strokeWidth="1" />
             <ellipse cx="400" cy="520" rx="280" ry="265" stroke="rgba(6,182,212,0.07)" strokeWidth="1" />
             <ellipse cx="400" cy="520" rx="170" ry="160" stroke="rgba(6,182,212,0.05)" strokeWidth="1" />
           </svg>
 
-          {/* Outer ring icons on elliptical path */}
-          {outerRing.map((brand, i) => {
-            const total = outerRing.length;
-            const startAngle = 195;
-            const spread = 150;
-            const baseAngle = startAngle + (spread / (total - 1)) * i;
+          {/* Outer ring — 8 icons evenly spaced around full ellipse */}
+          {outerRing.map((brand, i) => (
+            <OrbitIcon
+              key={`o-${brand.name}`}
+              brand={brand}
+              ringPath={outerPath}
+              startPercent={(i / outerRing.length) * 100}
+              duration={80}
+              iconSize={54}
+              visible={visible}
+              delay={i * 0.08}
+            />
+          ))}
 
-            return (
-              <div
-                key={brand.name}
-                className="absolute group"
-                style={{
-                  left: "50%",
-                  bottom: 0,
-                  width: 0,
-                  height: 0,
-                  animation: visible ? `ellipseOrbit 80s linear infinite` : "none",
-                  // Each icon gets a unique custom property for its starting angle
-                  // and the ellipse radii
-                  ["--start-angle" as string]: `${baseAngle}deg`,
-                  ["--rx" as string]: "390px",
-                  ["--ry" as string]: "370px",
-                  opacity: visible ? 1 : 0,
-                  transition: `opacity 0.5s ease ${i * 0.1}s`,
-                }}
-              >
-                <div
-                  className="absolute"
-                  style={{
-                    transform: `
-                      translate(-50%, -50%)
-                      rotate(calc(var(--start-angle) + var(--orbit-progress, 0deg)))
-                    `,
-                  }}
-                >
-                </div>
-              </div>
-            );
-          })}
+          {/* Middle ring — 6 icons evenly spaced, reverse direction */}
+          {middleRing.map((brand, i) => (
+            <OrbitIcon
+              key={`m-${brand.name}`}
+              brand={brand}
+              ringPath={middlePath}
+              startPercent={(i / middleRing.length) * 100}
+              duration={65}
+              reverse
+              iconSize={48}
+              visible={visible}
+              delay={0.3 + i * 0.08}
+            />
+          ))}
 
-          {/* Use CSS motion path approach instead */}
-          {/* Outer ring */}
-          {outerRing.map((brand, i) => {
-            const total = outerRing.length;
-            const startAngle = 195;
-            const spread = 150;
-            const initAngle = startAngle + (spread / (total - 1)) * i;
-
-            return (
-              <div
-                key={`outer-${brand.name}`}
-                className="absolute group z-10"
-                style={{
-                  offsetPath: `ellipse(48.75% 71.15% at 50% 100%)`,
-                  offsetRotate: "0deg",
-                  offsetDistance: `${((initAngle - 180) / 360) * 100}%`,
-                  animation: visible
-                    ? `moveAlongPath 80s linear infinite`
-                    : "none",
-                  opacity: visible ? 1 : 0,
-                  transition: `opacity 0.5s ease ${i * 0.08}s`,
-                } as React.CSSProperties}
-              >
-                <div
-                  className="rounded-full bg-white shadow-lg flex items-center justify-center cursor-default hover:scale-[1.3] transition-transform duration-300 border border-gray-100"
-                  style={{ width: 52, height: 52 }}
-                >
-                  <BrandIcon brand={brand} size={52} />
-                </div>
-                <div className="absolute -top-9 left-1/2 -translate-x-1/2 bg-white text-navy text-[10px] font-semibold px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none z-50">
-                  {brand.name}
-                </div>
-              </div>
-            );
-          })}
-
-          {/* Middle ring */}
-          {middleRing.map((brand, i) => {
-            const total = middleRing.length;
-            const startAngle = 200;
-            const spread = 140;
-            const initAngle = startAngle + (spread / (total - 1)) * i;
-
-            return (
-              <div
-                key={`mid-${brand.name}`}
-                className="absolute group z-10"
-                style={{
-                  offsetPath: `ellipse(35% 50.96% at 50% 100%)`,
-                  offsetRotate: "0deg",
-                  offsetDistance: `${((initAngle - 180) / 360) * 100}%`,
-                  animation: visible
-                    ? `moveAlongPathReverse 65s linear infinite`
-                    : "none",
-                  opacity: visible ? 1 : 0,
-                  transition: `opacity 0.5s ease ${0.3 + i * 0.08}s`,
-                } as React.CSSProperties}
-              >
-                <div
-                  className="rounded-full bg-white shadow-lg flex items-center justify-center cursor-default hover:scale-[1.3] transition-transform duration-300 border border-gray-100"
-                  style={{ width: 46, height: 46 }}
-                >
-                  <BrandIcon brand={brand} size={46} />
-                </div>
-                <div className="absolute -top-9 left-1/2 -translate-x-1/2 bg-white text-navy text-[10px] font-semibold px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none z-50">
-                  {brand.name}
-                </div>
-              </div>
-            );
-          })}
-
-          {/* Inner ring */}
-          {innerRing.map((brand, i) => {
-            const total = innerRing.length;
-            const startAngle = 210;
-            const spread = 120;
-            const initAngle = startAngle + (spread / (total - 1)) * i;
-
-            return (
-              <div
-                key={`inner-${brand.name}`}
-                className="absolute group z-10"
-                style={{
-                  offsetPath: `ellipse(21.25% 30.77% at 50% 100%)`,
-                  offsetRotate: "0deg",
-                  offsetDistance: `${((initAngle - 180) / 360) * 100}%`,
-                  animation: visible
-                    ? `moveAlongPath 50s linear infinite`
-                    : "none",
-                  opacity: visible ? 1 : 0,
-                  transition: `opacity 0.5s ease ${0.6 + i * 0.08}s`,
-                } as React.CSSProperties}
-              >
-                <div
-                  className="rounded-full bg-white shadow-lg flex items-center justify-center cursor-default hover:scale-[1.3] transition-transform duration-300 border border-gray-100"
-                  style={{ width: 40, height: 40 }}
-                >
-                  <BrandIcon brand={brand} size={40} />
-                </div>
-                <div className="absolute -top-9 left-1/2 -translate-x-1/2 bg-white text-navy text-[10px] font-semibold px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none z-50">
-                  {brand.name}
-                </div>
-              </div>
-            );
-          })}
+          {/* Inner ring — 4 icons evenly spaced */}
+          {innerRing.map((brand, i) => (
+            <OrbitIcon
+              key={`i-${brand.name}`}
+              brand={brand}
+              ringPath={innerPath}
+              startPercent={(i / innerRing.length) * 100}
+              duration={50}
+              iconSize={42}
+              visible={visible}
+              delay={0.6 + i * 0.08}
+            />
+          ))}
 
           {/* Center hub */}
           <div
@@ -265,11 +206,11 @@ export default function OrbitalIntegrations() {
       </div>
 
       <style jsx>{`
-        @keyframes moveAlongPath {
+        @keyframes moveFwd {
           from { offset-distance: 0%; }
           to { offset-distance: 100%; }
         }
-        @keyframes moveAlongPathReverse {
+        @keyframes moveReverse {
           from { offset-distance: 100%; }
           to { offset-distance: 0%; }
         }
