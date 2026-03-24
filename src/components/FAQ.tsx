@@ -36,41 +36,41 @@ const faqs = [
   },
 ];
 
-export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  // Split FAQs into two columns
-  const leftFaqs = faqs.filter((_, i) => i % 2 === 0);
-  const rightFaqs = faqs.filter((_, i) => i % 2 === 1);
-
-  const FaqItem = ({ faq, index }: { faq: typeof faqs[0]; index: number }) => (
+function FaqItem({
+  faq,
+  isOpen,
+  onToggle,
+}: {
+  faq: (typeof faqs)[0];
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
+  return (
     <div
-      className={`rounded-2xl border transition-all duration-300 ${
-        openIndex === index
+      className={`rounded-2xl border transition-colors duration-300 ${
+        isOpen
           ? "border-primary/20 bg-primary/[0.02] shadow-sm"
           : "border-border bg-white hover:border-primary/10"
       }`}
     >
       <button
-        onClick={() => setOpenIndex(openIndex === index ? null : index)}
+        onClick={onToggle}
         className="w-full flex items-center justify-between p-5 text-left"
-        aria-expanded={openIndex === index}
+        aria-expanded={isOpen}
       >
         <span
           className={`font-semibold pr-4 text-sm transition-colors ${
-            openIndex === index ? "text-primary" : "text-navy"
+            isOpen ? "text-primary" : "text-navy"
           }`}
         >
           {faq.question}
         </span>
         <div
           className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 transition-all ${
-            openIndex === index
-              ? "bg-primary text-white"
-              : "bg-surface text-muted"
+            isOpen ? "bg-primary text-white" : "bg-surface text-muted"
           }`}
         >
-          {openIndex === index ? (
+          {isOpen ? (
             <Minus className="w-3.5 h-3.5" />
           ) : (
             <Plus className="w-3.5 h-3.5" />
@@ -78,16 +78,36 @@ export default function FAQ() {
         </div>
       </button>
       <div
-        className={`overflow-hidden transition-all duration-300 ${
-          openIndex === index ? "max-h-96" : "max-h-0"
-        }`}
+        className="grid transition-[grid-template-rows] duration-300"
+        style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
       >
-        <div className="px-5 pb-5 text-muted text-sm leading-relaxed">
-          {faq.answer}
+        <div className="overflow-hidden">
+          <div className="px-5 pb-5 text-muted text-sm leading-relaxed">
+            {faq.answer}
+          </div>
         </div>
       </div>
     </div>
   );
+}
+
+export default function FAQ() {
+  const [openSet, setOpenSet] = useState<Set<number>>(new Set([0]));
+
+  const toggle = (index: number) => {
+    setOpenSet((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) {
+        next.delete(index);
+      } else {
+        next.add(index);
+      }
+      return next;
+    });
+  };
+
+  const leftFaqs = faqs.filter((_, i) => i % 2 === 0);
+  const rightFaqs = faqs.filter((_, i) => i % 2 === 1);
 
   return (
     <section id="faq" className="py-20 lg:py-28 bg-white">
@@ -104,17 +124,25 @@ export default function FAQ() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-4">
-          {/* Left column */}
+        <div className="grid lg:grid-cols-2 gap-4 items-start">
           <div className="space-y-4">
             {leftFaqs.map((faq, i) => (
-              <FaqItem key={i * 2} faq={faq} index={i * 2} />
+              <FaqItem
+                key={i * 2}
+                faq={faq}
+                isOpen={openSet.has(i * 2)}
+                onToggle={() => toggle(i * 2)}
+              />
             ))}
           </div>
-          {/* Right column */}
           <div className="space-y-4">
             {rightFaqs.map((faq, i) => (
-              <FaqItem key={i * 2 + 1} faq={faq} index={i * 2 + 1} />
+              <FaqItem
+                key={i * 2 + 1}
+                faq={faq}
+                isOpen={openSet.has(i * 2 + 1)}
+                onToggle={() => toggle(i * 2 + 1)}
+              />
             ))}
           </div>
         </div>
