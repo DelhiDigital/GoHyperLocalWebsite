@@ -39,7 +39,7 @@ export default function Hero() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left content */}
-          <div>
+          <div className="animate-slide-up">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/15 rounded-full px-4 py-1.5 mb-6">
               <Zap className="w-3.5 h-3.5 text-accent" />
               <span className="text-sm font-semibold text-accent">
@@ -96,7 +96,7 @@ export default function Hero() {
           </div>
 
           {/* Right — Contact Form (white card on dark bg) */}
-          <div>
+          <div className="animate-slide-up" style={{ animationDelay: "0.2s", animationFillMode: "both" }}>
             <form
               onSubmit={handleSubmit}
               className="bg-white rounded-3xl shadow-2xl p-8 sm:p-10"

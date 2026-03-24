@@ -1,5 +1,6 @@
 import { Wifi, Brain, Eye, AlertTriangle, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Reveal from "./Reveal";
 
 const pillars = [
   {
@@ -40,7 +41,7 @@ export default function ProductPillars() {
   return (
     <section className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
+        <Reveal className="text-center mb-14">
           <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 rounded-full px-4 py-1.5 mb-4">
             <span className="text-sm font-semibold text-primary">Core Capabilities</span>
           </div>
@@ -51,9 +52,9 @@ export default function ProductPillars() {
           <p className="text-lg text-muted max-w-2xl mx-auto">
             Four pillars that set your hyperlocal delivery operations apart.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <Reveal animation="stagger" className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {pillars.map((pillar) => (
             <div
               key={pillar.title}
@@ -70,14 +71,14 @@ export default function ProductPillars() {
               </p>
             </div>
           ))}
-        </div>
+        </Reveal>
 
-        <div className="text-center">
+        <Reveal className="text-center">
           <Link href="#contact" className="btn-outline">
             Talk to a Q-Commerce Expert
             <ArrowRight className="w-4 h-4" />
           </Link>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

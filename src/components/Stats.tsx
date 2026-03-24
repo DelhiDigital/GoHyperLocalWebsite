@@ -1,4 +1,5 @@
 import { TrendingUp, Clock, Package, Users } from "lucide-react";
+import Reveal from "./Reveal";
 
 const stats = [
   {
@@ -31,7 +32,7 @@ export default function Stats() {
   return (
     <section className="py-20 lg:py-28 bg-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
+        <Reveal className="text-center mb-14">
           <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 rounded-full px-4 py-1.5 mb-4">
             <span className="text-sm font-semibold text-primary">Market Opportunity</span>
           </div>
@@ -43,9 +44,9 @@ export default function Stats() {
             The market is moving fast. These numbers show why now is the time to
             launch your hyperlocal delivery operations.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Reveal animation="stagger" className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat) => (
             <div
               key={stat.label}
@@ -62,7 +63,7 @@ export default function Stats() {
               </div>
             </div>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

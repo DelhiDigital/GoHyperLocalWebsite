@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import Reveal from "./Reveal";
 
 const faqs = [
   {
@@ -112,7 +113,7 @@ export default function FAQ() {
   return (
     <section id="faq" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
+        <Reveal className="text-center mb-14">
           <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 rounded-full px-4 py-1.5 mb-4">
             <span className="text-sm font-semibold text-primary">FAQ</span>
           </div>
@@ -122,7 +123,7 @@ export default function FAQ() {
           <p className="text-lg text-muted">
             Everything you need to know about launching quick commerce with GoHyperLocal.
           </p>
-        </div>
+        </Reveal>
 
         <div className="grid lg:grid-cols-2 gap-4 items-start">
           <div className="space-y-4">

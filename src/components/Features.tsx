@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import Reveal from "./Reveal";
 
 const featureSections = [
   {
@@ -56,7 +57,7 @@ export default function Features() {
     <section id="features" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-16 lg:mb-20">
+        <Reveal className="text-center mb-16 lg:mb-20">
           <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 rounded-full px-4 py-1.5 mb-4">
             <span className="text-sm font-semibold text-primary">Platform Features</span>
           </div>
@@ -68,7 +69,7 @@ export default function Features() {
           <p className="text-lg text-muted max-w-2xl mx-auto">
             From backend logistics intelligence to a customer-facing delivery experience — all in one platform.
           </p>
-        </div>
+        </Reveal>
 
         {/* Feature sections */}
         <div className="space-y-20 lg:space-y-32">
@@ -80,7 +81,7 @@ export default function Features() {
               }`}
             >
               {/* Text side */}
-              <div className={idx % 2 === 1 ? "lg:order-2" : ""}>
+              <Reveal animation={idx % 2 === 0 ? "left" : "right"} className={idx % 2 === 1 ? "lg:order-2" : ""}>
                 <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 rounded-full px-3 py-1 mb-4">
                   <span className="text-xs font-semibold text-primary uppercase tracking-wider">
                     {section.badge}
@@ -109,10 +110,10 @@ export default function Features() {
                   Learn more
                   <span className="text-lg">→</span>
                 </Link>
-              </div>
+              </Reveal>
 
               {/* Image side */}
-              <div className={idx % 2 === 1 ? "lg:order-1" : ""}>
+              <Reveal animation={idx % 2 === 0 ? "right" : "left"} className={idx % 2 === 1 ? "lg:order-1" : ""}>
                 <div className="relative group">
                   <div className="rounded-2xl lg:rounded-3xl overflow-hidden shadow-lg">
                     <Image
@@ -126,7 +127,7 @@ export default function Features() {
                   {/* Decorative accent */}
                   <div className={`absolute -z-10 w-full h-full rounded-2xl lg:rounded-3xl top-4 ${idx % 2 === 0 ? "left-4" : "-left-4"} bg-primary/10`} />
                 </div>
-              </div>
+              </Reveal>
             </div>
           ))}
         </div>

@@ -1,6 +1,7 @@
 import { Monitor, Server, Sparkles, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import Reveal from "./Reveal";
 
 const cards = [
   {
@@ -43,7 +44,7 @@ export default function USP() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
+        <Reveal className="text-center mb-14">
           <div className="inline-flex items-center gap-2 bg-white/10 border border-white/15 rounded-full px-4 py-1.5 mb-4">
             <span className="text-sm font-semibold text-accent">Our Difference</span>
           </div>
@@ -55,9 +56,9 @@ export default function USP() {
             Other platforms stop at backend logistics. We go further — building the complete
             customer-facing delivery experience for your quick commerce operations.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
+        <Reveal animation="stagger" className="grid md:grid-cols-3 gap-6 mb-12">
           {cards.map((card) => (
             <div
               key={card.title}
@@ -94,13 +95,13 @@ export default function USP() {
               </ul>
             </div>
           ))}
-        </div>
+        </Reveal>
 
-        <div className="text-center">
+        <Reveal className="text-center">
           <Link href="#contact" className="btn-white">
             Contact Us
           </Link>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

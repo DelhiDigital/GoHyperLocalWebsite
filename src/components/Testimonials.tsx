@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import Reveal from "./Reveal";
 
 const testimonials = [
   {
@@ -51,16 +52,16 @@ export default function Testimonials() {
   return (
     <section className="py-20 lg:py-28 bg-surface">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <Reveal className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 rounded-full px-4 py-1.5 mb-4">
             <span className="text-sm font-semibold text-primary">Testimonials</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy tracking-tight">
             Trusted by <span className="gradient-text">Operations Teams</span>
           </h2>
-        </div>
+        </Reveal>
 
-        <div className="relative">
+        <Reveal animation="scale" className="relative">
           <div className="bg-white rounded-3xl shadow-sm p-8 sm:p-12 border border-border">
             {/* Quote icon */}
             <div className="w-12 h-12 rounded-2xl bg-primary/8 flex items-center justify-center mb-6">
@@ -116,7 +117,7 @@ export default function Testimonials() {
               />
             ))}
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

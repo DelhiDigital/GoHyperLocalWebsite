@@ -1,6 +1,7 @@
 import { Store, Truck, Monitor, BarChart3, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import Reveal from "./Reveal";
 
 const steps = [
   {
@@ -50,7 +51,7 @@ export default function HowItWorks() {
     <section id="how-it-works" className="py-20 lg:py-28 bg-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
+        <Reveal className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 rounded-full px-4 py-1.5 mb-4">
             <span className="text-sm font-semibold text-primary">How It Works</span>
           </div>
@@ -60,10 +61,10 @@ export default function HowItWorks() {
           <p className="text-lg text-muted max-w-2xl mx-auto">
             From setup to scale — we adapt to your carriers, your stores, and your customers.
           </p>
-        </div>
+        </Reveal>
 
         {/* Steps grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <Reveal animation="stagger" className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {steps.map((item) => (
             <div
               key={item.step}
@@ -98,10 +99,10 @@ export default function HowItWorks() {
               </div>
             </div>
           ))}
-        </div>
+        </Reveal>
 
         {/* CTA Banner */}
-        <div className="relative rounded-3xl overflow-hidden">
+        <Reveal className="relative rounded-3xl overflow-hidden">
           <Image
             src="/images/city-aerial.jpg"
             alt="City landscape representing hyperlocal delivery coverage"
@@ -123,7 +124,7 @@ export default function HowItWorks() {
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
