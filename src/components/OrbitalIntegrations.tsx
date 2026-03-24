@@ -135,9 +135,9 @@ export default function OrbitalIntegrations() {
         <div ref={ref} className="relative mx-auto" style={{ height: 520, maxWidth: 800 }}>
           {/* Arc lines */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 800 520" fill="none">
-            <ellipse cx="400" cy="520" rx="390" ry="370" stroke="rgba(6,182,212,0.1)" strokeWidth="1" />
-            <ellipse cx="400" cy="520" rx="280" ry="265" stroke="rgba(6,182,212,0.07)" strokeWidth="1" />
-            <ellipse cx="400" cy="520" rx="170" ry="160" stroke="rgba(6,182,212,0.05)" strokeWidth="1" />
+            <ellipse cx="400" cy="520" rx="390" ry="370" stroke="rgba(6,182,212,0.25)" strokeWidth="1.5" />
+            <ellipse cx="400" cy="520" rx="280" ry="265" stroke="rgba(6,182,212,0.2)" strokeWidth="1.5" />
+            <ellipse cx="400" cy="520" rx="170" ry="160" stroke="rgba(6,182,212,0.15)" strokeWidth="1.5" />
           </svg>
 
           {/* Outer ring — 8 icons evenly spaced around full ellipse */}
