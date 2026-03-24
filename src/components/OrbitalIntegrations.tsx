@@ -6,9 +6,9 @@ import { brandIcons } from "./brandIcons";
 
 type Brand = {
   name: string;
-  icon?: string; // key in brandIcons
+  icon?: string;
   color: string;
-  fallback?: string; // letter fallback if no icon
+  fallback?: string;
 };
 
 const outerRing: Brand[] = [
@@ -38,24 +38,13 @@ const innerRing: Brand[] = [
   { name: "PhonePe", icon: "phonepe", color: "#5F259F" },
 ];
 
-function BrandIcon({
-  brand,
-  size,
-}: {
-  brand: Brand;
-  size: number;
-}) {
+function BrandIcon({ brand, size }: { brand: Brand; size: number }) {
   const iconData = brand.icon ? brandIcons[brand.icon] : null;
   const iconSize = size * 0.45;
 
   if (iconData) {
     return (
-      <svg
-        width={iconSize}
-        height={iconSize}
-        viewBox="0 0 24 24"
-        fill={brand.color}
-      >
+      <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill={brand.color}>
         <path d={iconData.path} />
       </svg>
     );
@@ -71,94 +60,6 @@ function BrandIcon({
   );
 }
 
-function OrbitRing({
-  brands,
-  rx,
-  ry,
-  duration,
-  reverse,
-  baseSize,
-  visible,
-  delayOffset,
-  startAngle,
-  spread,
-}: {
-  brands: Brand[];
-  rx: number;
-  ry: number;
-  duration: number;
-  reverse?: boolean;
-  baseSize: number;
-  visible: boolean;
-  delayOffset: number;
-  startAngle: number;
-  spread: number;
-}) {
-  const dir = reverse ? -1 : 1;
-
-  return (
-    <div
-      className={`absolute inset-0 transition-opacity duration-700 ${
-        visible ? "opacity-100" : "opacity-0"
-      }`}
-      style={{
-        animation: visible
-          ? `orbit${reverse ? "Rev" : "Fwd"} ${duration}s linear infinite`
-          : "none",
-        transitionDelay: `${delayOffset * 200}ms`,
-      }}
-    >
-      {brands.map((brand, i) => {
-        const total = brands.length;
-        const angleDeg =
-          startAngle + (spread / (total - 1)) * i;
-        const angleRad = (angleDeg * Math.PI) / 180;
-        const cx = 50;
-        const cy = 100;
-        const x = cx + rx * Math.cos(angleRad);
-        const y = cy + ry * Math.sin(angleRad);
-
-        return (
-          <div
-            key={brand.name}
-            className="absolute z-10"
-            style={{
-              left: `${x}%`,
-              top: `${y}%`,
-              transform: "translate(-50%, -50%)",
-              opacity: visible ? 1 : 0,
-              animation: visible
-                ? `iconPop 0.5s ease-out ${delayOffset * 0.15 + i * 0.08}s both`
-                : "none",
-            }}
-          >
-            {/* Counter-rotate to keep icon upright */}
-            <div
-              className="group relative"
-              style={{
-                animation: visible
-                  ? `orbit${reverse ? "Fwd" : "Rev"} ${duration}s linear infinite`
-                  : "none",
-              }}
-            >
-              <div
-                className="rounded-full bg-white shadow-lg flex items-center justify-center cursor-default hover:scale-[1.2] transition-transform duration-300 border border-white/80"
-                style={{ width: baseSize, height: baseSize }}
-              >
-                <BrandIcon brand={brand} size={baseSize} />
-              </div>
-              {/* Tooltip */}
-              <div className="absolute -top-9 left-1/2 -translate-x-1/2 bg-white text-navy text-[10px] font-semibold px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none z-50">
-                {brand.name}
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
 export default function OrbitalIntegrations() {
   const { ref, visible } = useReveal(0.15);
 
@@ -168,13 +69,10 @@ export default function OrbitalIntegrations() {
         {/* Header */}
         <div className="text-center mb-4">
           <div className="inline-flex items-center gap-2 bg-white/10 border border-white/15 rounded-full px-4 py-1.5 mb-4">
-            <span className="text-sm font-semibold text-accent">
-              Integrations
-            </span>
+            <span className="text-sm font-semibold text-accent">Integrations</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight">
-            One Platform,{" "}
-            <span className="text-primary-light">Infinite Integrations</span>
+            One Platform, <span className="text-primary-light">Infinite Integrations</span>
           </h2>
           <p className="text-lg text-white/50 max-w-2xl mx-auto">
             Connect your storefront, carriers, and tools — we handle the rest.
@@ -184,7 +82,7 @@ export default function OrbitalIntegrations() {
         {/* Orbital visualization */}
         <div
           ref={ref}
-          className="relative mx-auto flex items-end justify-center"
+          className="relative mx-auto"
           style={{ height: 520, maxWidth: 800 }}
         >
           {/* Arc lines */}
@@ -193,26 +91,164 @@ export default function OrbitalIntegrations() {
             viewBox="0 0 800 520"
             fill="none"
           >
-            <ellipse
-              cx="400" cy="520" rx="390" ry="370"
-              stroke="rgba(6,182,212,0.1)" strokeWidth="1"
-            />
-            <ellipse
-              cx="400" cy="520" rx="280" ry="265"
-              stroke="rgba(6,182,212,0.07)" strokeWidth="1"
-            />
-            <ellipse
-              cx="400" cy="520" rx="170" ry="160"
-              stroke="rgba(6,182,212,0.05)" strokeWidth="1"
-            />
+            <ellipse cx="400" cy="520" rx="390" ry="370" stroke="rgba(6,182,212,0.1)" strokeWidth="1" />
+            <ellipse cx="400" cy="520" rx="280" ry="265" stroke="rgba(6,182,212,0.07)" strokeWidth="1" />
+            <ellipse cx="400" cy="520" rx="170" ry="160" stroke="rgba(6,182,212,0.05)" strokeWidth="1" />
           </svg>
+
+          {/* Outer ring icons on elliptical path */}
+          {outerRing.map((brand, i) => {
+            const total = outerRing.length;
+            const startAngle = 195;
+            const spread = 150;
+            const baseAngle = startAngle + (spread / (total - 1)) * i;
+
+            return (
+              <div
+                key={brand.name}
+                className="absolute group"
+                style={{
+                  left: "50%",
+                  bottom: 0,
+                  width: 0,
+                  height: 0,
+                  animation: visible ? `ellipseOrbit 80s linear infinite` : "none",
+                  // Each icon gets a unique custom property for its starting angle
+                  // and the ellipse radii
+                  ["--start-angle" as string]: `${baseAngle}deg`,
+                  ["--rx" as string]: "390px",
+                  ["--ry" as string]: "370px",
+                  opacity: visible ? 1 : 0,
+                  transition: `opacity 0.5s ease ${i * 0.1}s`,
+                }}
+              >
+                <div
+                  className="absolute"
+                  style={{
+                    transform: `
+                      translate(-50%, -50%)
+                      rotate(calc(var(--start-angle) + var(--orbit-progress, 0deg)))
+                    `,
+                  }}
+                >
+                </div>
+              </div>
+            );
+          })}
+
+          {/* Use CSS motion path approach instead */}
+          {/* Outer ring */}
+          {outerRing.map((brand, i) => {
+            const total = outerRing.length;
+            const startAngle = 195;
+            const spread = 150;
+            const initAngle = startAngle + (spread / (total - 1)) * i;
+
+            return (
+              <div
+                key={`outer-${brand.name}`}
+                className="absolute group z-10"
+                style={{
+                  offsetPath: `ellipse(48.75% 71.15% at 50% 100%)`,
+                  offsetRotate: "0deg",
+                  offsetDistance: `${((initAngle - 180) / 360) * 100}%`,
+                  animation: visible
+                    ? `moveAlongPath 80s linear infinite`
+                    : "none",
+                  opacity: visible ? 1 : 0,
+                  transition: `opacity 0.5s ease ${i * 0.08}s`,
+                } as React.CSSProperties}
+              >
+                <div
+                  className="rounded-full bg-white shadow-lg flex items-center justify-center cursor-default hover:scale-[1.3] transition-transform duration-300 border border-gray-100"
+                  style={{ width: 52, height: 52 }}
+                >
+                  <BrandIcon brand={brand} size={52} />
+                </div>
+                <div className="absolute -top-9 left-1/2 -translate-x-1/2 bg-white text-navy text-[10px] font-semibold px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none z-50">
+                  {brand.name}
+                </div>
+              </div>
+            );
+          })}
+
+          {/* Middle ring */}
+          {middleRing.map((brand, i) => {
+            const total = middleRing.length;
+            const startAngle = 200;
+            const spread = 140;
+            const initAngle = startAngle + (spread / (total - 1)) * i;
+
+            return (
+              <div
+                key={`mid-${brand.name}`}
+                className="absolute group z-10"
+                style={{
+                  offsetPath: `ellipse(35% 50.96% at 50% 100%)`,
+                  offsetRotate: "0deg",
+                  offsetDistance: `${((initAngle - 180) / 360) * 100}%`,
+                  animation: visible
+                    ? `moveAlongPathReverse 65s linear infinite`
+                    : "none",
+                  opacity: visible ? 1 : 0,
+                  transition: `opacity 0.5s ease ${0.3 + i * 0.08}s`,
+                } as React.CSSProperties}
+              >
+                <div
+                  className="rounded-full bg-white shadow-lg flex items-center justify-center cursor-default hover:scale-[1.3] transition-transform duration-300 border border-gray-100"
+                  style={{ width: 46, height: 46 }}
+                >
+                  <BrandIcon brand={brand} size={46} />
+                </div>
+                <div className="absolute -top-9 left-1/2 -translate-x-1/2 bg-white text-navy text-[10px] font-semibold px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none z-50">
+                  {brand.name}
+                </div>
+              </div>
+            );
+          })}
+
+          {/* Inner ring */}
+          {innerRing.map((brand, i) => {
+            const total = innerRing.length;
+            const startAngle = 210;
+            const spread = 120;
+            const initAngle = startAngle + (spread / (total - 1)) * i;
+
+            return (
+              <div
+                key={`inner-${brand.name}`}
+                className="absolute group z-10"
+                style={{
+                  offsetPath: `ellipse(21.25% 30.77% at 50% 100%)`,
+                  offsetRotate: "0deg",
+                  offsetDistance: `${((initAngle - 180) / 360) * 100}%`,
+                  animation: visible
+                    ? `moveAlongPath 50s linear infinite`
+                    : "none",
+                  opacity: visible ? 1 : 0,
+                  transition: `opacity 0.5s ease ${0.6 + i * 0.08}s`,
+                } as React.CSSProperties}
+              >
+                <div
+                  className="rounded-full bg-white shadow-lg flex items-center justify-center cursor-default hover:scale-[1.3] transition-transform duration-300 border border-gray-100"
+                  style={{ width: 40, height: 40 }}
+                >
+                  <BrandIcon brand={brand} size={40} />
+                </div>
+                <div className="absolute -top-9 left-1/2 -translate-x-1/2 bg-white text-navy text-[10px] font-semibold px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none z-50">
+                  {brand.name}
+                </div>
+              </div>
+            );
+          })}
 
           {/* Center hub */}
           <div
-            className={`absolute bottom-0 left-1/2 z-30 transition-all duration-1000 ease-out`}
+            className="absolute bottom-0 left-1/2 z-30"
             style={{
               transform: `translateX(-50%) translateY(50%) scale(${visible ? 1 : 0.5})`,
               opacity: visible ? 1 : 0,
+              transition: "all 1s ease-out",
             }}
           >
             <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-primary flex items-center justify-center shadow-[0_0_80px_rgba(37,99,235,0.5)] border-2 border-primary-light/30">
@@ -225,63 +261,17 @@ export default function OrbitalIntegrations() {
               />
             </div>
           </div>
-
-          {/* Three orbiting rings */}
-          <OrbitRing
-            brands={outerRing}
-            rx={48}
-            ry={70}
-            duration={80}
-            baseSize={52}
-            visible={visible}
-            delayOffset={0}
-            startAngle={195}
-            spread={150}
-          />
-          <OrbitRing
-            brands={middleRing}
-            rx={35}
-            ry={51}
-            duration={65}
-            reverse
-            baseSize={46}
-            visible={visible}
-            delayOffset={2}
-            startAngle={200}
-            spread={140}
-          />
-          <OrbitRing
-            brands={innerRing}
-            rx={21}
-            ry={30}
-            duration={50}
-            baseSize={40}
-            visible={visible}
-            delayOffset={4}
-            startAngle={210}
-            spread={120}
-          />
         </div>
       </div>
 
       <style jsx>{`
-        @keyframes orbitFwd {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
+        @keyframes moveAlongPath {
+          from { offset-distance: 0%; }
+          to { offset-distance: 100%; }
         }
-        @keyframes orbitRev {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(-360deg); }
-        }
-        @keyframes iconPop {
-          from {
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0);
-          }
-          to {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-          }
+        @keyframes moveAlongPathReverse {
+          from { offset-distance: 100%; }
+          to { offset-distance: 0%; }
         }
       `}</style>
     </section>
