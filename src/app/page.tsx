@@ -73,7 +73,7 @@ export default function Home() {
                 name: "How quickly can I launch quick commerce with GoHyperLocal?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Most brands go live within 1-2 weeks with dedicated onboarding support and pre-built integrations.",
+                  text: "Most brands go live within 1 week with dedicated onboarding support and pre-built integrations.",
                 },
               },
             ],

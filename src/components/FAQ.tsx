@@ -28,12 +28,12 @@ const faqs = [
   {
     question: "How quickly can I launch quick commerce with GoHyperLocal?",
     answer:
-      "Most brands go live within 1-2 weeks. Our platform handles everything from dark store configuration and delivery zone setup to carrier integration and customer tracking page deployment. We provide dedicated onboarding support and pre-built integrations, so you can focus on your business while we handle the logistics infrastructure.",
+      "Most brands go live within 1 week. Our platform handles everything from dark store configuration and delivery zone setup to carrier integration and customer tracking page deployment. We provide dedicated onboarding support and pre-built integrations, so you can focus on your business while we handle the logistics infrastructure.",
   },
   {
     question: "Can I use GoHyperLocal for both quick commerce and standard deliveries?",
     answer:
-      "Yes. GoHyperLocal supports hyperlocal quick commerce (10-minute to 2-hour deliveries), same-day delivery, next-day delivery, and standard shipping. You can manage all delivery types from a single platform with unified tracking, notifications, and analytics.",
+      "Yes. GoHyperLocal supports hyperlocal quick commerce with ultra-fast deliveries, same-day delivery, next-day delivery, and standard shipping. You can manage all delivery types from a single platform with unified tracking, notifications, and analytics.",
   },
 ];
 

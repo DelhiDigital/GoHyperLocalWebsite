@@ -33,8 +33,8 @@ const featureSections = [
       { icon: Clock, text: "Prevent orders from sitting idle at stores waiting for pickup" },
       { icon: RefreshCw, text: "Automatic carrier switching when riders don't show up" },
     ],
-    image: "/images/parcels-closeup.jpg",
-    imageAlt: "Parcels being prepared and sorted for hyperlocal delivery operations",
+    image: "/images/delivery-ops.jpg",
+    imageAlt: "Hands sealing a parcel box for hyperlocal delivery dispatch",
   },
   {
     badge: "Customer Experience",
@@ -47,8 +47,8 @@ const featureSections = [
       { icon: Layers, text: "Unified delivery statuses across all carrier partners" },
       { icon: MessageSquare, text: "Multi-channel alerts via WhatsApp, SMS, and email" },
     ],
-    image: "/images/ecommerce-packing.jpg",
-    imageAlt: "Online shopping and ecommerce delivery experience",
+    image: "/images/customer-app.jpg",
+    imageAlt: "Customer using smartphone app to track delivery in real time",
   },
 ];
 

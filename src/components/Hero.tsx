@@ -81,14 +81,14 @@ export default function Hero() {
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <Clock className="w-4 h-4 text-accent" />
-                  <span className="text-2xl font-bold text-white">10 min</span>
+                  <span className="text-2xl font-bold text-white">Ultra-Fast</span>
                 </div>
-                <span className="text-xs text-white/50">Fastest delivery</span>
+                <span className="text-xs text-white/50">Express deliveries</span>
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <Zap className="w-4 h-4 text-accent" />
-                  <span className="text-2xl font-bold text-white">2 weeks</span>
+                  <span className="text-2xl font-bold text-white">1 week</span>
                 </div>
                 <span className="text-xs text-white/50">Go live timeline</span>
               </div>
@@ -195,7 +195,7 @@ export default function Hero() {
 
               <p className="text-xs text-muted text-center mt-4">
                 Or call us directly at{" "}
-                <a href="tel:+919205110208" className="text-primary font-medium hover:underline">
+                <a href="tel:+919958848981" className="text-primary font-medium hover:underline">
                   +91 92051 10208
                 </a>
               </p>

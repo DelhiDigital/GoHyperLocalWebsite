@@ -63,7 +63,7 @@ export default function Header() {
 
           <div className="hidden lg:flex items-center gap-3">
             <a
-              href="tel:+919205110208"
+              href="tel:+919958848981"
               className={`flex items-center gap-2 text-sm font-medium transition-colors ${scrolled ? "text-muted hover:text-navy" : "text-white/70 hover:text-white"}`}
             >
               <Phone className="w-4 h-4" />
@@ -104,7 +104,7 @@ export default function Header() {
             ))}
             <div className="pt-4 space-y-3">
               <a
-                href="tel:+919205110208"
+                href="tel:+919958848981"
                 className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted"
               >
                 <Phone className="w-4 h-4" />

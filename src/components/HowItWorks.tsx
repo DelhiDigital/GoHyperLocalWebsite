@@ -116,7 +116,7 @@ export default function HowItWorks() {
                 Ready to go live?
               </h3>
               <p className="text-white/70 max-w-md">
-                Most brands launch their quick commerce operations with us in under 2 weeks.
+                Most brands launch their quick commerce operations with us in under 1 week.
               </p>
             </div>
             <Link href="#contact" className="btn-white flex-shrink-0">
