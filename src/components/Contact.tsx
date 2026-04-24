@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Send, Mail, Phone, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { trackLead } from "@/lib/meta-capi";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -21,13 +22,22 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const [firstName, ...rest] = formData.name.trim().split(" ");
+    void trackLead({
+      email: formData.email,
+      phone: formData.phone,
+      firstName,
+      lastName: rest.join(" "),
+      company: formData.company,
+      message: formData.message,
+    });
     const subject = encodeURIComponent(
       `New Enquiry from ${formData.name} — ${formData.company}`
     );
     const body = encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\nPhone: ${formData.phone || "Not provided"}\n\nMessage:\n${formData.message || "No message"}`
     );
-    window.location.href = `mailto:hello@delhidigital.co?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:hello@delhidigital.co?cc=anuj@delhidigital.co&subject=${subject}&body=${body}`;
   };
 
   return (
@@ -60,7 +70,7 @@ export default function Contact() {
 
             <div className="space-y-4">
               <a
-                href="mailto:hello@delhidigital.co"
+                href="mailto:hello@delhidigital.co?cc=anuj@delhidigital.co"
                 className="flex items-center gap-3 text-white/70 hover:text-white transition-colors group"
               >
                 <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import MetaPixel from "@/components/MetaPixel";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -57,7 +58,10 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <MetaPixel />
+        {children}
+      </body>
     </html>
   );
 }

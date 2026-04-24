@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Zap, Clock, TrendingUp, Send, ArrowRight } from "lucide-react";
+import { trackLead } from "@/lib/meta-capi";
 
 export default function Hero() {
   const [formData, setFormData] = useState({
@@ -21,13 +22,22 @@ export default function Hero() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const [firstName, ...rest] = formData.name.trim().split(" ");
+    void trackLead({
+      email: formData.email,
+      phone: formData.phone,
+      firstName,
+      lastName: rest.join(" "),
+      company: formData.company,
+      message: formData.message,
+    });
     const subject = encodeURIComponent(
       `New Enquiry from ${formData.name} — ${formData.company}`
     );
     const body = encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\nPhone: ${formData.phone || "Not provided"}\n\nMessage:\n${formData.message || "No message"}`
     );
-    window.location.href = `mailto:hello@delhidigital.co?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:hello@delhidigital.co?cc=anuj@delhidigital.co&subject=${subject}&body=${body}`;
   };
 
   return (
