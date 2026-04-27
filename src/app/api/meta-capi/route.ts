@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
 const GRAPH_VERSION = "v21.0";
+const DEFAULT_PIXEL_ID = "2496348817478807";
 
 const hash = (value: string) =>
   crypto.createHash("sha256").update(value.trim().toLowerCase()).digest("hex");
@@ -9,13 +10,13 @@ const hash = (value: string) =>
 const normalizePhone = (phone: string) => phone.replace(/\D/g, "");
 
 export async function POST(req: NextRequest) {
-  const pixelId = process.env.META_PIXEL_ID;
+  const pixelId = process.env.META_PIXEL_ID || DEFAULT_PIXEL_ID;
   const accessToken = process.env.META_CAPI_ACCESS_TOKEN;
   const testEventCode = process.env.META_CAPI_TEST_EVENT_CODE;
 
-  if (!pixelId || !accessToken) {
+  if (!accessToken) {
     return NextResponse.json(
-      { error: "Meta CAPI not configured" },
+      { error: "META_CAPI_ACCESS_TOKEN not configured on server" },
       { status: 500 }
     );
   }
