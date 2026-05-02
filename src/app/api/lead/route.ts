@@ -1,28 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
-import { Resend } from "resend";
 
 const GRAPH_VERSION = "v21.0";
 const PIXEL_ID = "1434455288430633";
-
-const LEAD_RECIPIENTS = [
-  "hello@delhidigital.co",
-  "anuj@delhidigital.co",
-  "shivam@delhidigital.co",
-];
 
 const hash = (value: string) =>
   crypto.createHash("sha256").update(value.trim().toLowerCase()).digest("hex");
 
 const normalizePhone = (p: string) => p.replace(/\D/g, "");
-
-const escapeHtml = (s: string) =>
-  s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
 
 async function sendCapi(args: {
   email?: string;
@@ -88,36 +73,40 @@ async function sendEmail(args: {
   source: string;
   pageUrl?: string;
 }) {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) return { skipped: true, reason: "no_resend_key" };
-
-  const resend = new Resend(apiKey);
-  const fromAddress =
-    process.env.RESEND_FROM || "GoHyperLocal Leads <onboarding@resend.dev>";
-
-  const html = `
-    <h2>New lead from ${escapeHtml(args.source)}</h2>
-    <table cellpadding="6" style="border-collapse:collapse;font-family:system-ui,sans-serif;font-size:14px">
-      <tr><td><b>Name</b></td><td>${escapeHtml(args.name)}</td></tr>
-      <tr><td><b>Email</b></td><td><a href="mailto:${escapeHtml(args.email)}">${escapeHtml(args.email)}</a></td></tr>
-      <tr><td><b>Phone</b></td><td>${escapeHtml(args.phone || "—")}</td></tr>
-      <tr><td><b>Company</b></td><td>${escapeHtml(args.company || "—")}</td></tr>
-      <tr><td><b>Message</b></td><td>${escapeHtml(args.message || "—")}</td></tr>
-      <tr><td><b>Page</b></td><td>${escapeHtml(args.pageUrl || "—")}</td></tr>
-      <tr><td><b>Time</b></td><td>${new Date().toISOString()}</td></tr>
-    </table>
-  `;
+  const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
+  if (!accessKey) return { skipped: true, reason: "no_web3forms_key" };
 
   const subject = `New lead: ${args.name}${args.company ? " — " + args.company : ""}`;
+  const messageBody =
+    `Source: ${args.source}\n` +
+    `Name: ${args.name}\n` +
+    `Email: ${args.email}\n` +
+    `Phone: ${args.phone || "—"}\n` +
+    `Company: ${args.company || "—"}\n` +
+    `Message: ${args.message || "—"}\n` +
+    `Page: ${args.pageUrl || "—"}\n` +
+    `Time: ${new Date().toISOString()}`;
 
-  const result = await resend.emails.send({
-    from: fromAddress,
-    to: LEAD_RECIPIENTS,
-    replyTo: args.email,
-    subject,
-    html,
+  const res = await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      access_key: accessKey,
+      subject,
+      from_name: "GoHyperLocal Website",
+      replyto: args.email,
+      name: args.name,
+      email: args.email,
+      phone: args.phone,
+      company: args.company,
+      message: messageBody,
+    }),
   });
-  return { ok: !result.error, result };
+  const json = await res.json();
+  return { ok: res.ok && json?.success !== false, response: json };
 }
 
 export async function POST(req: NextRequest) {
