@@ -117,7 +117,7 @@ export default function Footer() {
                   className="flex items-center gap-3 text-sm text-white/40 hover:text-white transition-colors"
                 >
                   <Phone className="w-4 h-4 flex-shrink-0" />
-                  +91 92051 10208
+                  +91 99588 48981
                 </a>
               </li>
               <li>

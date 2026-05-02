@@ -1,15 +1,11 @@
 export type LeadPayload = {
-  email?: string;
+  name: string;
+  email: string;
   phone?: string;
-  firstName?: string;
-  lastName?: string;
-  city?: string;
   company?: string;
   message?: string;
+  source?: string;
 };
-
-const makeEventId = () =>
-  `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 
 declare global {
   interface Window {
@@ -17,35 +13,31 @@ declare global {
   }
 }
 
-export async function trackLead(data: LeadPayload) {
+const makeEventId = () =>
+  `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+
+export async function submitLead(data: LeadPayload) {
   const eventId = makeEventId();
-  const sourceUrl = typeof window !== "undefined" ? window.location.href : undefined;
+  const sourceUrl =
+    typeof window !== "undefined" ? window.location.href : undefined;
 
   if (typeof window !== "undefined" && typeof window.fbq === "function") {
-    window.fbq("track", "Lead", { company: data.company }, { eventID: eventId });
+    window.fbq(
+      "track",
+      "Lead",
+      { company: data.company, source: data.source },
+      { eventID: eventId }
+    );
   }
 
-  try {
-    await fetch("/api/meta-capi", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        eventName: "Lead",
-        eventId,
-        email: data.email,
-        phone: data.phone,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        city: data.city,
-        sourceUrl,
-        customData: {
-          company: data.company,
-          message: data.message,
-        },
-      }),
-      keepalive: true,
-    });
-  } catch {
-    // Fire-and-forget — don't block the user flow
+  const res = await fetch("/api/lead", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...data, eventId, sourceUrl }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Lead submission failed (${res.status})`);
   }
+  return res.json();
 }

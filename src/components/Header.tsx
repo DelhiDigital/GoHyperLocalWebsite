@@ -67,7 +67,7 @@ export default function Header() {
               className={`flex items-center gap-2 text-sm font-medium transition-colors ${scrolled ? "text-muted hover:text-navy" : "text-white/70 hover:text-white"}`}
             >
               <Phone className="w-4 h-4" />
-              +91 92051 10208
+              +91 99588 48981
             </a>
             <Link href="#contact" className="btn-primary">
               Contact Us
@@ -108,7 +108,7 @@ export default function Header() {
                 className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted"
               >
                 <Phone className="w-4 h-4" />
-                +91 92051 10208
+                +91 99588 48981
               </a>
               <Link
                 href="#contact"

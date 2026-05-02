@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Mail, Phone, ArrowRight } from "lucide-react";
+import { Send, Mail, Phone, ArrowRight, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
-import { trackLead } from "@/lib/meta-capi";
+import { submitLead } from "@/lib/meta-capi";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -13,6 +13,7 @@ export default function Contact() {
     phone: "",
     message: "",
   });
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -20,24 +21,16 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const [firstName, ...rest] = formData.name.trim().split(" ");
-    void trackLead({
-      email: formData.email,
-      phone: formData.phone,
-      firstName,
-      lastName: rest.join(" "),
-      company: formData.company,
-      message: formData.message,
-    });
-    const subject = encodeURIComponent(
-      `New Enquiry from ${formData.name} — ${formData.company}`
-    );
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\nPhone: ${formData.phone || "Not provided"}\n\nMessage:\n${formData.message || "No message"}`
-    );
-    window.location.href = `mailto:hello@delhidigital.co?cc=anuj@delhidigital.co&subject=${subject}&body=${body}`;
+    setStatus("submitting");
+    try {
+      await submitLead({ ...formData, source: "Contact Form" });
+      setStatus("success");
+      setFormData({ name: "", email: "", company: "", phone: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -85,7 +78,7 @@ export default function Contact() {
                 <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
                   <Phone className="w-5 h-5" />
                 </div>
-                <span className="text-sm font-medium">+91 92051 10208</span>
+                <span className="text-sm font-medium">+91 99588 48981</span>
               </a>
             </div>
           </div>
@@ -176,12 +169,30 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="btn-white w-full sm:w-auto"
+                disabled={status === "submitting"}
+                className="btn-white w-full sm:w-auto disabled:opacity-60"
               >
-                <Send className="w-4 h-4" />
-                Send Message
-                <ArrowRight className="w-4 h-4" />
+                {status === "success" ? (
+                  <>
+                    <CheckCircle2 className="w-4 h-4" />
+                    Sent — we&apos;ll be in touch
+                  </>
+                ) : status === "submitting" ? (
+                  <>Sending...</>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    Send Message
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
               </button>
+
+              {status === "error" && (
+                <p className="text-sm text-red-200 mt-3">
+                  Something went wrong. Please call us or email hello@delhidigital.co directly.
+                </p>
+              )}
             </form>
           </div>
         </div>

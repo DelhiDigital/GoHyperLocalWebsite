@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Zap, Clock, TrendingUp, Send, ArrowRight } from "lucide-react";
-import { trackLead } from "@/lib/meta-capi";
+import { Zap, Clock, TrendingUp, Send, ArrowRight, CheckCircle2 } from "lucide-react";
+import { submitLead } from "@/lib/meta-capi";
 
 export default function Hero() {
   const [formData, setFormData] = useState({
@@ -13,6 +13,7 @@ export default function Hero() {
     phone: "",
     message: "",
   });
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -20,24 +21,16 @@ export default function Hero() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const [firstName, ...rest] = formData.name.trim().split(" ");
-    void trackLead({
-      email: formData.email,
-      phone: formData.phone,
-      firstName,
-      lastName: rest.join(" "),
-      company: formData.company,
-      message: formData.message,
-    });
-    const subject = encodeURIComponent(
-      `New Enquiry from ${formData.name} — ${formData.company}`
-    );
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\nPhone: ${formData.phone || "Not provided"}\n\nMessage:\n${formData.message || "No message"}`
-    );
-    window.location.href = `mailto:hello@delhidigital.co?cc=anuj@delhidigital.co&subject=${subject}&body=${body}`;
+    setStatus("submitting");
+    try {
+      await submitLead({ ...formData, source: "Hero Form" });
+      setStatus("success");
+      setFormData({ name: "", email: "", company: "", phone: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -198,15 +191,36 @@ export default function Hero() {
                 </div>
               </div>
 
-              <button type="submit" className="btn-primary w-full mt-6">
-                <Send className="w-4 h-4" />
-                Contact Us
+              <button
+                type="submit"
+                disabled={status === "submitting"}
+                className="btn-primary w-full mt-6 disabled:opacity-60"
+              >
+                {status === "success" ? (
+                  <>
+                    <CheckCircle2 className="w-4 h-4" />
+                    Sent — we&apos;ll be in touch
+                  </>
+                ) : status === "submitting" ? (
+                  <>Sending...</>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    Contact Us
+                  </>
+                )}
               </button>
+
+              {status === "error" && (
+                <p className="text-xs text-red-600 text-center mt-3">
+                  Something went wrong. Please call us or email hello@delhidigital.co.
+                </p>
+              )}
 
               <p className="text-xs text-muted text-center mt-4">
                 Or call us directly at{" "}
                 <a href="tel:+919958848981" className="text-primary font-medium hover:underline">
-                  +91 92051 10208
+                  +91 99588 48981
                 </a>
               </p>
             </form>

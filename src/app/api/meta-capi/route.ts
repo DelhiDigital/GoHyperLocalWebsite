@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
 const GRAPH_VERSION = "v21.0";
-const DEFAULT_PIXEL_ID = "2496348817478807";
+const DEFAULT_PIXEL_ID = "1434455288430633";
 
 const hash = (value: string) =>
   crypto.createHash("sha256").update(value.trim().toLowerCase()).digest("hex");
