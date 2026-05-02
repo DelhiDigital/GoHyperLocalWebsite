@@ -40,12 +40,12 @@ async function sendCapi(args: {
   const pixelId = process.env.META_PIXEL_ID || PIXEL_ID;
   const testEventCode = process.env.META_CAPI_TEST_EVENT_CODE;
 
-  const userData: Record<string, string> = {};
-  if (args.email) userData.em = hash(args.email);
-  if (args.phone) userData.ph = hash(normalizePhone(args.phone));
-  if (args.firstName) userData.fn = hash(args.firstName);
-  if (args.lastName) userData.ln = hash(args.lastName);
-  if (args.city) userData.ct = hash(args.city);
+  const userData: Record<string, string | string[]> = {};
+  if (args.email) userData.em = [hash(args.email)];
+  if (args.phone) userData.ph = [hash(normalizePhone(args.phone))];
+  if (args.firstName) userData.fn = [hash(args.firstName)];
+  if (args.lastName) userData.ln = [hash(args.lastName)];
+  if (args.city) userData.ct = [hash(args.city)];
   if (args.clientIp) userData.client_ip_address = args.clientIp;
   if (args.userAgent) userData.client_user_agent = args.userAgent;
   if (args.fbp) userData.fbp = args.fbp;

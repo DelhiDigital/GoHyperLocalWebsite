@@ -35,11 +35,11 @@ export async function POST(req: NextRequest) {
   } = body;
 
   const userData: Record<string, string | string[]> = {};
-  if (email) userData.em = hash(email);
-  if (phone) userData.ph = hash(normalizePhone(phone));
-  if (firstName) userData.fn = hash(firstName);
-  if (lastName) userData.ln = hash(lastName);
-  if (city) userData.ct = hash(city);
+  if (email) userData.em = [hash(email)];
+  if (phone) userData.ph = [hash(normalizePhone(phone))];
+  if (firstName) userData.fn = [hash(firstName)];
+  if (lastName) userData.ln = [hash(lastName)];
+  if (city) userData.ct = [hash(city)];
 
   const fwd = req.headers.get("x-forwarded-for");
   const clientIp = fwd ? fwd.split(",")[0].trim() : req.headers.get("x-real-ip");
