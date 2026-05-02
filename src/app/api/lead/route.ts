@@ -87,26 +87,40 @@ async function sendEmail(args: {
     `Page: ${args.pageUrl || "—"}\n` +
     `Time: ${new Date().toISOString()}`;
 
-  const res = await fetch("https://api.web3forms.com/submit", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      access_key: accessKey,
-      subject,
-      from_name: "GoHyperLocal Website",
-      replyto: args.email,
-      name: args.name,
-      email: args.email,
-      phone: args.phone,
-      company: args.company,
-      message: messageBody,
-    }),
-  });
-  const json = await res.json();
-  return { ok: res.ok && json?.success !== false, response: json };
+  try {
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        access_key: accessKey,
+        subject,
+        from_name: "GoHyperLocal Website",
+        name: args.name,
+        email: args.email,
+        phone: args.phone || "",
+        company: args.company || "",
+        message: messageBody,
+      }),
+    });
+    const text = await res.text();
+    let json: unknown;
+    try {
+      json = JSON.parse(text);
+    } catch {
+      json = { raw: text };
+    }
+    const success =
+      res.ok &&
+      typeof json === "object" &&
+      json !== null &&
+      (json as { success?: boolean }).success === true;
+    return { ok: success, status: res.status, response: json };
+  } catch (err) {
+    return { ok: false, error: (err as Error).message };
+  }
 }
 
 export async function POST(req: NextRequest) {
