@@ -5,7 +5,11 @@ import { Resend } from "resend";
 const GRAPH_VERSION = "v21.0";
 const PIXEL_ID = "1434455288430633";
 
-const LEAD_RECIPIENTS = ["anuj@delhidigital.co", "shivam@delhidigital.co"];
+const LEAD_RECIPIENTS = [
+  "hello@delhidigital.co",
+  "anuj@delhidigital.co",
+  "shivam@delhidigital.co",
+];
 
 const hash = (value: string) =>
   crypto.createHash("sha256").update(value.trim().toLowerCase()).digest("hex");
