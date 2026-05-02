@@ -5,8 +5,7 @@ import { Resend } from "resend";
 const GRAPH_VERSION = "v21.0";
 const PIXEL_ID = "1434455288430633";
 
-const TO_EMAIL = "hello@delhidigital.co";
-const CC_EMAIL = "anuj@delhidigital.co";
+const LEAD_RECIPIENTS = ["anuj@delhidigital.co", "shivam@delhidigital.co"];
 
 const hash = (value: string) =>
   crypto.createHash("sha256").update(value.trim().toLowerCase()).digest("hex");
@@ -109,8 +108,7 @@ async function sendEmail(args: {
 
   const result = await resend.emails.send({
     from: fromAddress,
-    to: [TO_EMAIL],
-    cc: [CC_EMAIL],
+    to: LEAD_RECIPIENTS,
     replyTo: args.email,
     subject,
     html,
