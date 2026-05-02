@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import MetaPixel from "@/components/MetaPixel";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -60,6 +61,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col font-sans">
         <MetaPixel />
+        <SmoothScroll />
         {children}
       </body>
     </html>
