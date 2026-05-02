@@ -64,65 +64,6 @@ async function sendCapi(args: {
   return { ok: res.ok, response: json };
 }
 
-async function sendEmail(args: {
-  name: string;
-  email: string;
-  phone?: string;
-  company?: string;
-  message?: string;
-  source: string;
-  pageUrl?: string;
-}) {
-  const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
-  if (!accessKey) return { skipped: true, reason: "no_web3forms_key" };
-
-  const subject = `New lead: ${args.name}${args.company ? " — " + args.company : ""}`;
-  const messageBody =
-    `Source: ${args.source}\n` +
-    `Name: ${args.name}\n` +
-    `Email: ${args.email}\n` +
-    `Phone: ${args.phone || "—"}\n` +
-    `Company: ${args.company || "—"}\n` +
-    `Message: ${args.message || "—"}\n` +
-    `Page: ${args.pageUrl || "—"}\n` +
-    `Time: ${new Date().toISOString()}`;
-
-  try {
-    const res = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        access_key: accessKey,
-        subject,
-        from_name: "GoHyperLocal Website",
-        name: args.name,
-        email: args.email,
-        phone: args.phone || "",
-        company: args.company || "",
-        message: messageBody,
-      }),
-    });
-    const text = await res.text();
-    let json: unknown;
-    try {
-      json = JSON.parse(text);
-    } catch {
-      json = { raw: text };
-    }
-    const success =
-      res.ok &&
-      typeof json === "object" &&
-      json !== null &&
-      (json as { success?: boolean }).success === true;
-    return { ok: success, status: res.status, response: json };
-  } catch (err) {
-    return { ok: false, error: (err as Error).message };
-  }
-}
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -131,7 +72,6 @@ export async function POST(req: NextRequest) {
       email = "",
       phone = "",
       company = "",
-      message = "",
       source = "Website Form",
       sourceUrl,
     } = body;
@@ -157,39 +97,21 @@ export async function POST(req: NextRequest) {
       body.eventId ||
       `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 
-    const [emailResult, capiResult] = await Promise.allSettled([
-      sendEmail({
-        name,
-        email,
-        phone,
-        company,
-        message,
-        source,
-        pageUrl: sourceUrl,
-      }),
-      sendCapi({
-        email,
-        phone,
-        firstName,
-        lastName,
-        eventId,
-        sourceUrl,
-        customData: { company, source },
-        clientIp,
-        userAgent,
-        fbp,
-        fbc,
-      }),
-    ]);
-
-    return NextResponse.json({
-      ok: true,
+    const capiResult = await sendCapi({
+      email,
+      phone,
+      firstName,
+      lastName,
       eventId,
-      email:
-        emailResult.status === "fulfilled" ? emailResult.value : { error: "failed" },
-      capi:
-        capiResult.status === "fulfilled" ? capiResult.value : { error: "failed" },
+      sourceUrl,
+      customData: { company, source },
+      clientIp,
+      userAgent,
+      fbp,
+      fbc,
     });
+
+    return NextResponse.json({ ok: true, eventId, capi: capiResult });
   } catch (err) {
     return NextResponse.json(
       { ok: false, error: (err as Error).message },
